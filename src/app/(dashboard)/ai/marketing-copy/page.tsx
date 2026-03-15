@@ -1,0 +1,105 @@
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Megaphone, Copy, Check, Sparkles, Send, LayoutGrid } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+// DashboardLayout removed - handled by (dashboard)/layout.tsx
+import { useCopy } from '@/hooks/useCopy';
+
+export default function MarketingCopyPage() {
+  const [topic, setTopic] = useState('');
+  const [result, setResult] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { copied, copy } = useCopy();
+
+  const handleGenerate = async () => {
+    if (!topic) return;
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai/marketing-copy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setResult(data.data);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8 max-w-4xl mx-auto">
+      <div className="text-center space-y-4">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-16 h-16 mx-auto rounded-2xl gradient-primary flex items-center justify-center mb-6"
+          >
+            <Megaphone className="w-8 h-8 text-white" />
+          </motion.div>
+          <h1 className="text-4xl font-bold">AI Marketing Copy</h1>
+          <p className="text-lg text-muted-foreground">Generate high-converting WhatsApp marketing copy in seconds.</p>
+        </div>
+
+        <div className="bg-card border border-border rounded-3xl p-8 shadow-sm space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">What are you promoting?</label>
+            <textarea
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              placeholder="e.g., Summer sale 30% off, New coffee shop opening, Festive season discount..."
+              className="w-full h-32 p-4 rounded-2xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all resize-none"
+            />
+          </div>
+
+          <Button
+            onClick={handleGenerate}
+            disabled={!topic}
+            isLoading={loading}
+            className="w-full py-4 text-lg"
+            leftIcon={<Sparkles className="w-5 h-5" />}
+          >
+            Generate Marketing Copy
+          </Button>
+        </div>
+
+        <AnimatePresence>
+          {result && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-card border-2 border-[var(--primary)]/20 rounded-3xl p-8 shadow-xl space-y-6 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-4">
+                <Sparkles className="w-6 h-6 text-[var(--primary)] opacity-20" />
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-xl">Generated Copy</h3>
+                  <Button
+                    onClick={() => copy(result)}
+                    variant="secondary"
+                    size="sm"
+                    className="flex items-center gap-2"
+                    leftIcon={copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  >
+                    {copied ? 'Copied!' : 'Copy Result'}
+                  </Button>
+                </div>
+                <div className="p-6 rounded-2xl bg-muted/30 border border-border min-h-[300px] flex flex-col">
+                  <p className="flex-1 text-foreground font-medium leading-relaxed whitespace-pre-line custom-scrollbar">{result}</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+    </div>
+  );
+}
