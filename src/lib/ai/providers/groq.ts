@@ -1,7 +1,7 @@
 import { ChatGroq } from "@langchain/groq";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { BaseAIProvider } from "./base";
-import { GenerationOptions, ProviderResponse } from "../types";
+import { GenerationOptions } from "../types";
 
 export class GroqProvider extends BaseAIProvider {
   name = "groq";
@@ -16,13 +16,10 @@ export class GroqProvider extends BaseAIProvider {
     });
   }
 
-  async generate(template: PromptTemplate<any, any>, options: GenerationOptions): Promise<ProviderResponse> {
-    try {
-      const chain = template.pipe(this.model).pipe(this.parser);
-      const result = await chain.invoke(options);
-      return { success: true, data: result as string };
-    } catch (error: any) {
-      return { success: false, error: error.message };
-    }
+  async generate(template: PromptTemplate<any, any>, options: GenerationOptions): Promise<string> {
+    const chain = template.pipe(this.model).pipe(this.parser);
+    const result = await chain.invoke(options);
+    return result as string;
   }
 }
+

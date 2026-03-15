@@ -17,5 +17,5 @@ export interface ProviderResponse {
 
 export interface AIProvider {
   name: string;
-  generate(template: any, options: GenerationOptions): Promise<ProviderResponse>;
+  generate(template: any, options: GenerationOptions): Promise<string>;
 }
