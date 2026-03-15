@@ -39,3 +39,6 @@ next-env.d.ts
 # tests
 test_*.txt
 test_*.log
+
+.vercel
+.env*.local
