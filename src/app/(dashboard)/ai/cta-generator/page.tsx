@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Copy, Check, Sparkles, MousePointerClick } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-// DashboardLayout removed - handled by (dashboard)/layout.tsx
 import { useCopy } from '@/hooks/useCopy';
 
 export default function CTAGeneratorPage() {

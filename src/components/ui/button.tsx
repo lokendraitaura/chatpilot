@@ -1,9 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends HTMLMotionProps<'button'> {
   isLoading?: boolean;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
@@ -43,7 +43,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <span className={cn('flex items-center gap-2 transition-all', isLoading && 'opacity-0')}>
           {leftIcon && <span className="shrink-0">{leftIcon}</span>}
-          {children}
+          {children as React.ReactNode}
           {rightIcon && <span className="shrink-0">{rightIcon}</span>}
         </span>
 

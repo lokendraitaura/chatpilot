@@ -1,10 +1,11 @@
+'use client';
+
 import { useState } from 'react';
 import { Sparkles, Copy, Check, MessageSquare, Send, Heart, Briefcase, Users, LayoutGrid, Info } from 'lucide-react';
 import { useCopy } from '@/hooks/useCopy';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-// DashboardLayout removed - handled by (dashboard)/layout.tsx
 
 export default function MessageGeneratorPage() {
   const [purpose, setPurpose] = useState('');

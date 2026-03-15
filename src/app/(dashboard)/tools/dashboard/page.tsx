@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { 
   Link as LinkIcon, 
@@ -24,7 +24,6 @@ import {
   Megaphone,
   UserCheck
 } from 'lucide-react';
-// DashboardLayout removed - handled by (dashboard)/layout.tsx
 
 const ALL_TOOLS = [
   {

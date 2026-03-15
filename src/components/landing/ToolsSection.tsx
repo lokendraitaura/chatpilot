@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link as LinkIcon, QrCode, MousePointerClick, Scissors, Type, Share2, Package, Mic, LayoutTemplate, Clock, Store } from 'lucide-react';
 
 const tools = [

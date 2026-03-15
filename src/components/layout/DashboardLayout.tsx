@@ -8,29 +8,28 @@ import {
   MessageSquare, 
   LayoutDashboard, 
   Settings, 
-  Menu,
-  X,
-  Link as LinkIcon,
-  QrCode,
-  MousePointerClick,
-  Type,
-  Scissors,
-  Share2,
-  Package,
-  Mic,
-  LayoutTemplate,
-  Clock,
-  Store,
-  BookOpen
+  Menu, 
+  X, 
+  Link as LinkIcon, 
+  QrCode, 
+  MousePointerClick, 
+  Type, 
+  Scissors, 
+  Share2, 
+  Package, 
+  Mic, 
+  LayoutTemplate, 
+  Clock, 
+  Store, 
+  BookOpen 
 } from 'lucide-react';
 import { useTheme } from '@/components/providers/ThemeProvider';
-
 import { Logo } from '@/components/ui/Logo';
 
 const TOOLS = [
   { name: 'Link Generator', href: '/tools/link-generator', icon: LinkIcon, group: 'Core Tools' },
   { name: 'QR Code', href: '/tools/qr-generator', icon: QrCode, group: 'Core Tools' },
-  { name: 'Button Maker', href: '/tools/button-generator', icon: MousePointerClick, group: 'Core Tools' },
+  { name: 'Button Maker', icon: MousePointerClick, href: '/tools/button-generator', group: 'Core Tools' },
   { name: 'Link Shortener', href: '/tools/link-shortener', icon: Scissors, group: 'Core Tools' },
   { name: 'Formatter', href: '/tools/message-formatter', icon: Type, group: 'Core Tools' },
   { name: 'Share Link', href: '/tools/share-link', icon: Share2, group: 'Core Tools' },
@@ -66,7 +65,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-muted/30">
-      {/* Mobile Sidebar Overlay */}
       <AnimatePresence>
         {sidebarOpen && (
           <motion.div
@@ -96,9 +94,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
         <div className="p-4 space-y-6">
           <div>
-            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">
-              Menu
-            </h3>
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">Menu</h3>
             <div className="space-y-1">
               {mainNavigation.map((item) => (
                 <Link
@@ -118,9 +114,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">
-              Tools
-            </h3>
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">Tools</h3>
             <div className="space-y-1">
               {TOOLS.map((item) => (
                 <Link
@@ -140,9 +134,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">
-              AI Features
-            </h3>
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 px-2">AI Features</h3>
             <div className="space-y-1">
               {AI_TOOLS.map((item) => (
                 <Link
@@ -163,9 +155,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      {/* Main Content */}
       <div className="lg:pl-64 flex flex-col min-h-screen">
-        {/* Top Header for Dashboard Navigation */}
         <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-4 md:px-8 bg-background/50 backdrop-blur-md border-b border-border transition-all">
           <div className="flex items-center space-x-4">
             <button

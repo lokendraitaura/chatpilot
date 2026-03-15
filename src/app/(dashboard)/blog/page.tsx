@@ -92,7 +92,7 @@ export default function BlogPage() {
               </div>
             </motion.div>
           ))}
+      </div>
     </div>
-  </div>
-);
+  );
 }

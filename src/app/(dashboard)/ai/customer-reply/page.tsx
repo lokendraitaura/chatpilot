@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { Sparkles, Copy, Check, RefreshCw, MessageCircle, LayoutGrid, Heart, Briefcase, Users, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCopy } from '@/hooks/useCopy';
-import { motion, AnimatePresence } from 'motion/react';
-// DashboardLayout removed - handled by (dashboard)/layout.tsx
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CustomerReplyPage() {
   const [customerMessage, setCustomerMessage] = useState('');

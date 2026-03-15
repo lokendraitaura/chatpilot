@@ -70,6 +70,7 @@ export default function BlogPostPage() {
           <p>
             In conclusion, ChatPilot provides the tools you need to automate and refine this process. From generating AI-powered messages to creating secure QR codes, we help you master the art of conversational commerce.
           </p>
+      </div>
     </div>
   );
 }
