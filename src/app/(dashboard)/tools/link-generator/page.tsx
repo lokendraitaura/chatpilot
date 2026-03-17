@@ -1,18 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { Phone, MessageSquare, Link as LinkIcon, Copy, Check, ExternalLink, Zap } from 'lucide-react';
+import { Phone, MessageSquare, Link as LinkIcon, Copy, Check, ExternalLink, Zap, ChevronDown, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { generateWhatsAppLink } from '@/lib/whatsapp';
 import { useCopy } from '@/hooks/useCopy';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { COUNTRY_CODES, DEFAULT_COUNTRY, validatePhoneNumber, type CountryCode } from '@/lib/countryCodes';
 
 export default function LinkGeneratorPage() {
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
   const { copied, copy } = useCopy();
 
-  const whatsappLink = generateWhatsAppLink(phoneNumber, message);
+  const fullPhone = phoneNumber ? `${selectedCountry.digits}${phoneNumber.replace(/\D/g, '')}` : '';
+  const whatsappLink = generateWhatsAppLink(fullPhone, message);
+  const validation = validatePhoneNumber(phoneNumber, selectedCountry);
+  const isValid = phoneNumber.length > 0 && validation.valid;
 
   return (
     <div className="space-y-10 max-w-5xl mx-auto">
@@ -32,17 +38,103 @@ export default function LinkGeneratorPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         <div className="bg-card border border-border rounded-3xl p-8 shadow-sm space-y-8">
-          <div className="space-y-4">
+          {/* Country Code + Phone Number */}
+          <div className="space-y-3">
             <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
               <Phone className="w-4 h-4" /> Phone Number
             </label>
-            <input
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="e.g. 1234567890 (inc. country code)"
-              className="w-full p-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium"
-            />
+            <div className="flex gap-3">
+              {/* Country selector */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex items-center gap-2 px-4 py-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium whitespace-nowrap cursor-pointer hover:border-[var(--primary)]/50"
+                >
+                  <span className="text-xl">{selectedCountry.flag}</span>
+                  <span className="text-sm font-bold">{selectedCountry.code}</span>
+                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                </button>
+                <AnimatePresence>
+                  {showDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      className="absolute left-0 top-full mt-2 z-50 bg-card border border-border rounded-2xl shadow-xl overflow-y-auto max-h-64 min-w-[220px]"
+                    >
+                      {COUNTRY_CODES.map((country) => (
+                        <button
+                          key={`${country.name}-${country.code}`}
+                          type="button"
+                          onClick={() => {
+                            setSelectedCountry(country);
+                            setShowDropdown(false);
+                          }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted/50 transition-colors text-left cursor-pointer ${
+                            selectedCountry.code === country.code && selectedCountry.name === country.name
+                              ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-bold'
+                              : ''
+                          }`}
+                        >
+                          <span className="text-lg">{country.flag}</span>
+                          <span className="flex-1">{country.name}</span>
+                          <span className="font-mono text-muted-foreground">{country.code}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Number input */}
+              <div className="flex-1 relative">
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
+                  placeholder={`e.g. ${'9'.repeat(selectedCountry.minLength)}`}
+                  maxLength={selectedCountry.maxLength}
+                  className={`w-full p-4 rounded-xl border-2 bg-background outline-none transition-all font-medium ${
+                    phoneNumber && !validation.valid
+                      ? 'border-red-400 focus:border-red-500'
+                      : phoneNumber && validation.valid
+                      ? 'border-green-500 focus:border-green-600'
+                      : 'border-border focus:border-[var(--primary)]'
+                  }`}
+                />
+                {phoneNumber && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {validation.valid ? (
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 text-red-400" />
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Validation message */}
+            <AnimatePresence>
+              {phoneNumber && !validation.valid && (
+                <motion.p
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="text-xs text-red-500 flex items-center gap-1.5"
+                >
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                  {validation.message}
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            <p className="text-xs text-muted-foreground">
+              {selectedCountry.name} numbers: {selectedCountry.minLength === selectedCountry.maxLength
+                ? `${selectedCountry.minLength} digits`
+                : `${selectedCountry.minLength}–${selectedCountry.maxLength} digits`}
+            </p>
           </div>
 
           <div className="space-y-4">
@@ -66,17 +158,15 @@ export default function LinkGeneratorPage() {
         <div className="lg:sticky lg:top-8 space-y-6 text-left">
           <div className="bg-card border-2 border-[var(--primary)]/20 rounded-3xl p-8 shadow-xl space-y-6 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary)]/5 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
-            
             <h3 className="font-bold text-xl relative z-10">Your generated link is ready</h3>
-            
             <div className="p-6 rounded-2xl bg-muted/50 border border-border break-all font-mono text-xs leading-relaxed text-muted-foreground relative z-10 min-h-[100px] flex items-center justify-center">
-              {phoneNumber ? whatsappLink : 'Enter phone number to generate link...'}
+              {isValid ? whatsappLink : 'Enter a valid phone number to generate link...'}
             </div>
 
             <div className="grid grid-cols-2 gap-4 relative z-10">
               <Button
                 onClick={() => copy(whatsappLink)}
-                disabled={!phoneNumber}
+                disabled={!isValid}
                 variant={copied ? 'secondary' : 'primary'}
                 className="w-full py-4 text-sm"
                 leftIcon={copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -84,18 +174,18 @@ export default function LinkGeneratorPage() {
                 {copied ? 'Copied!' : 'Copy Link'}
               </Button>
 
-              <a 
-                href={whatsappLink} 
-                target="_blank" 
+              <a
+                href={isValid ? whatsappLink : '#'}
+                target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold bg-muted hover:bg-muted/80 transition-all text-sm ${!phoneNumber && 'opacity-50 pointer-events-none'}`}
+                className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold bg-muted hover:bg-muted/80 transition-all text-sm ${!isValid && 'opacity-50 pointer-events-none'}`}
               >
                 <ExternalLink className="w-4 h-4" />
                 Test Link
               </a>
             </div>
           </div>
-          
+
           <p className="px-4 text-xs text-muted-foreground leading-relaxed">
             Note: ChatPilot links are standard WhatsApp links (`wa.me`) and are 100% safe and secure.
           </p>

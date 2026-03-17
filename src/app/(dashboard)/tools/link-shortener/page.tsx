@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Scissors, Copy, Check, ExternalLink, Link as LinkIcon, Sparkles } from 'lucide-react';
+import { Scissors, Copy, Check, ExternalLink, Link as LinkIcon, Sparkles, AlertCircle } from 'lucide-react';
 import { useCopy } from '@/hooks/useCopy';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -10,16 +10,32 @@ export default function LinkShortenerPage() {
   const [url, setUrl] = useState('');
   const [shortened, setShortened] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { copied, copy } = useCopy();
 
   const handleShorten = async () => {
     if (!url) return;
     setLoading(true);
-    // Simulation of shortening logic
-    setTimeout(() => {
-      setShortened(`https://chp.lt/${Math.random().toString(36).substring(7)}`);
+    setError('');
+    setShortened('');
+
+    try {
+      // TinyURL free API - no auth required
+      const apiUrl = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(url)}`;
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error('Failed to shorten URL');
+      const shortUrl = await response.text();
+      if (!shortUrl.startsWith('http')) throw new Error('Invalid response from shortener');
+      setShortened(shortUrl.trim());
+    } catch (err) {
+      setError('Could not shorten this URL. Please check that it\'s a valid URL and try again.');
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleShorten();
   };
 
   return (
@@ -44,7 +60,8 @@ export default function LinkShortenerPage() {
           <input
             type="url"
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) => { setUrl(e.target.value); setError(''); }}
+            onKeyDown={handleKeyDown}
             placeholder="https://wa.me/1234567890?text=..."
             className="w-full p-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium"
           />
@@ -59,6 +76,20 @@ export default function LinkShortenerPage() {
         >
           Shorten Link
         </Button>
+
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm"
+            >
+              <AlertCircle className="w-5 h-5 shrink-0" />
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <AnimatePresence>
@@ -68,7 +99,7 @@ export default function LinkShortenerPage() {
             animate={{ opacity: 1, scale: 1 }}
             className="bg-card border-2 border-[var(--primary)]/20 rounded-3xl p-8 shadow-xl space-y-6 text-center"
           >
-            <h3 className="font-bold text-xl uppercase tracking-widest text-[var(--primary)] text-xs">Your Short Link</h3>
+            <h3 className="font-bold uppercase tracking-widest text-[var(--primary)] text-xs">Your Short Link</h3>
             <div className="text-2xl font-bold break-all text-foreground select-all">{shortened}</div>
             <div className="flex gap-4">
               <Button
@@ -79,9 +110,9 @@ export default function LinkShortenerPage() {
               >
                 {copied ? 'Copied!' : 'Copy Link'}
               </Button>
-              <a 
-                href={shortened} 
-                target="_blank" 
+              <a
+                href={shortened}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 px-6 py-4 rounded-xl font-bold bg-muted hover:bg-muted/80 transition-all flex items-center justify-center gap-2"
               >

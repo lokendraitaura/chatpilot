@@ -4,7 +4,6 @@ import { Hero } from '@/components/landing/Hero';
 import { ToolsSection } from '@/components/landing/ToolsSection';
 import { AiSection } from '@/components/landing/AiSection';
 import { HowItWorks } from '@/components/landing/HowItWorks';
-import { Testimonials } from '@/components/landing/Testimonials';
 
 export default function HomePage() {
   return (
@@ -14,7 +13,6 @@ export default function HomePage() {
       <ToolsSection />
       <AiSection />
       <HowItWorks />
-      <Testimonials />
       <Footer />
     </main>
   );

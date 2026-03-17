@@ -1,20 +1,27 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check, Code, Phone, MousePointerClick } from 'lucide-react';
+import { Copy, Check, Code, Phone, MousePointerClick, ChevronDown, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { generateWhatsAppLink } from '@/lib/whatsapp';
 import { useCopy } from '@/hooks/useCopy';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { COUNTRY_CODES, DEFAULT_COUNTRY, validatePhoneNumber, type CountryCode } from '@/lib/countryCodes';
 
 export default function ButtonGeneratorPage() {
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [text, setText] = useState('Chat on WhatsApp');
   const [color, setColor] = useState('#25D366');
+  const [showDropdown, setShowDropdown] = useState(false);
   const { copied, copy } = useCopy();
 
-  const whatsappLink = generateWhatsAppLink(phoneNumber);
-  const embedCode = `<a href="${whatsappLink}" style="background-color: ${color}; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; font-weight: bold; font-family: sans-serif;">
+  const fullPhone = phoneNumber ? `${selectedCountry.digits}${phoneNumber.replace(/\D/g, '')}` : '';
+  const whatsappLink = generateWhatsAppLink(fullPhone);
+  const validation = validatePhoneNumber(phoneNumber, selectedCountry);
+  const isValid = phoneNumber.length > 0 && validation.valid;
+
+  const embedCode = `<a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" style="background-color: ${color}; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; font-weight: bold; font-family: sans-serif;">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 8px;" />
   ${text}
 </a>`;
@@ -37,17 +44,82 @@ export default function ButtonGeneratorPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         <div className="bg-card border border-border rounded-3xl p-8 shadow-sm space-y-8">
-          <div className="space-y-4">
+          {/* Country Code + Phone */}
+          <div className="space-y-3">
             <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
               <Phone className="w-4 h-4" /> WhatsApp Number
             </label>
-            <input
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="e.g. 1234567890"
-              className="w-full p-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium"
-            />
+            <div className="flex gap-3">
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex items-center gap-2 px-4 py-4 rounded-xl border-2 border-border hover:border-[var(--primary)]/50 bg-background outline-none transition-all font-medium whitespace-nowrap cursor-pointer"
+                >
+                  <span className="text-xl">{selectedCountry.flag}</span>
+                  <span className="text-sm font-bold">{selectedCountry.code}</span>
+                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                </button>
+                <AnimatePresence>
+                  {showDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      className="absolute left-0 top-full mt-2 z-50 bg-card border border-border rounded-2xl shadow-xl overflow-y-auto max-h-64 min-w-[220px]"
+                    >
+                      {COUNTRY_CODES.map((country) => (
+                        <button
+                          key={`${country.name}-${country.code}`}
+                          type="button"
+                          onClick={() => { setSelectedCountry(country); setShowDropdown(false); }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted/50 transition-colors text-left cursor-pointer ${
+                            selectedCountry.name === country.name ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-bold' : ''
+                          }`}
+                        >
+                          <span className="text-lg">{country.flag}</span>
+                          <span className="flex-1">{country.name}</span>
+                          <span className="font-mono text-muted-foreground">{country.code}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <div className="flex-1 relative">
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
+                  placeholder={`e.g. ${'9'.repeat(selectedCountry.minLength)}`}
+                  maxLength={selectedCountry.maxLength}
+                  className={`w-full p-4 rounded-xl border-2 bg-background outline-none transition-all font-medium ${
+                    phoneNumber && !validation.valid ? 'border-red-400' :
+                    phoneNumber && validation.valid ? 'border-green-500' : 'border-border focus:border-[var(--primary)]'
+                  }`}
+                />
+                {phoneNumber && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {validation.valid
+                      ? <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      : <AlertCircle className="w-5 h-5 text-red-400" />}
+                  </div>
+                )}
+              </div>
+            </div>
+            <AnimatePresence>
+              {phoneNumber && !validation.valid && (
+                <motion.p
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="text-xs text-red-500 flex items-center gap-1.5"
+                >
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                  {validation.message}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="space-y-4">
@@ -75,15 +147,24 @@ export default function ButtonGeneratorPage() {
         </div>
 
         <div className="lg:sticky lg:top-8 flex flex-col space-y-8">
-          <div className="bg-card border border-border rounded-3xl p-10 flex flex-col items-center justify-center text-center">
-            <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-8">Live Preview</h3>
-            <div 
+          <div className="bg-card border border-border rounded-3xl p-10 flex flex-col items-center justify-center text-center space-y-6">
+            <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Live Preview</h3>
+            {/* Fixed: now a real clickable <a> that opens WhatsApp */}
+            <a
+              href={isValid ? whatsappLink : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ backgroundColor: color }}
-              className="px-8 py-4 rounded-2xl text-white font-bold flex items-center space-x-3 shadow-xl cursor-pointer hover:opacity-90 transition-opacity"
+              className={`px-8 py-4 rounded-2xl text-white font-bold flex items-center space-x-3 shadow-xl transition-opacity ${
+                isValid ? 'hover:opacity-90 cursor-pointer' : 'opacity-60 cursor-not-allowed pointer-events-none'
+              }`}
             >
               <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" className="w-6 h-6 invert" />
               <span>{text}</span>
-            </div>
+            </a>
+            {!isValid && (
+              <p className="text-xs text-muted-foreground">Enter a valid number to activate the button</p>
+            )}
           </div>
 
           <div className="bg-card border border-border rounded-3xl p-8 space-y-4">

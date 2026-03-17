@@ -50,7 +50,7 @@ export default function SettingsPage() {
   ];
 
   return (
-    <div className="space-y-8 pb-20">
+    <div className="space-y-8 pb-20 max-w-full overflow-x-hidden">
         <header className="space-y-2">
           <div className="flex items-center space-x-3 text-[var(--primary)]">
             <Settings className="w-6 h-6 animate-spin-slow" />
@@ -61,12 +61,12 @@ export default function SettingsPage() {
         </header>
 
         {/* Tabs */}
-        <div className="flex space-x-1 p-1 bg-muted/50 rounded-2xl w-fit">
+        <div className="flex flex-wrap gap-1 p-1 bg-muted/50 rounded-2xl w-full sm:w-fit">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center space-x-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+              className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer flex-1 sm:flex-none justify-center ${
                 activeTab === tab.id 
                   ? 'bg-background shadow-sm text-[var(--primary)]' 
                   : 'text-muted-foreground hover:text-foreground'
@@ -78,7 +78,7 @@ export default function SettingsPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
           {/* Main content */}
           <div className="lg:col-span-2 space-y-6">
             <AnimatePresence mode="wait">

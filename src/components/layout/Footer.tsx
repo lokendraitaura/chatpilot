@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MessageCircle, Mail, Github, Twitter } from 'lucide-react';
+import { Mail, Linkedin } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 
 export function Footer() {
@@ -19,13 +19,20 @@ export function Footer() {
               Your all-in-one WhatsApp toolkit powered by AI. Generate links, QR codes, messages, and more - all from one powerful dashboard.
             </p>
             <div className="flex items-center space-x-4 mt-6">
-              <a href="#" className="text-muted-foreground hover:text-[var(--primary)] transition-colors cursor-pointer">
-                <Twitter className="w-5 h-5" />
+              <a
+                href="https://www.linkedin.com/in/lokendra-kumar-prajapati-9942072b8"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Connect on LinkedIn"
+                className="text-muted-foreground hover:text-[var(--primary)] transition-colors cursor-pointer"
+              >
+                <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-[var(--primary)] transition-colors cursor-pointer">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-[var(--primary)] transition-colors cursor-pointer">
+              <a
+                href="mailto:lokendraitaura@gmail.com"
+                aria-label="Send Email"
+                className="text-muted-foreground hover:text-[var(--primary)] transition-colors cursor-pointer"
+              >
                 <Mail className="w-5 h-5" />
               </a>
             </div>
@@ -86,10 +93,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-8 text-center">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} ChatPilot. All rights reserved. Made with ❤️ for WhatsApp power users.
           </p>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <a href="mailto:lokendraitaura@gmail.com" className="hover:text-[var(--primary)] transition-colors">
+              lokendraitaura@gmail.com
+            </a>
+          </div>
         </div>
       </div>
     </footer>
