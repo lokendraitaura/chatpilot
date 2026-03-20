@@ -189,8 +189,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        {/* pt-14 = header height compensation so content doesn't hide behind fixed header */}
-        <main className="flex-1 flex flex-col pt-14 p-4 md:p-8 lg:p-12 overflow-x-hidden">
+        {/* pt-24 = ample breathing room to prevent content from sticking to the fixed header */}
+        <main className="flex-1 flex flex-col pt-24 pb-12 p-4 md:p-8 lg:p-12 overflow-x-hidden">
           <div className="w-full max-w-5xl mx-auto flex-1 h-full">
             {children}
           </div>

@@ -10,14 +10,47 @@ export default function VoiceToMessage() {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState('');
   const { copied, copy } = useCopy();
+  const recognitionRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+
+      recognitionRef.current.onresult = (event: any) => {
+        let currentTranscript = '';
+        for (let i = 0; i < event.results.length; ++i) {
+          currentTranscript += event.results[i][0].transcript;
+        }
+        setTranscript(currentTranscript);
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error('Speech recognition error', event.error);
+        setIsRecording(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsRecording(false);
+      };
+    }
+  }, []);
 
   const toggleRecording = () => {
-    setIsRecording(!isRecording);
-    if (!isRecording) {
-      // Logic for starting recording
+    if (!recognitionRef.current) {
+      alert('Speech recognition is not supported in this browser.');
+      return;
+    }
+
+    if (isRecording) {
+      recognitionRef.current.stop();
+      setIsRecording(false);
     } else {
-      // Logic for stopping recording and generating transcript (mock)
-      setTranscript("Hello! This is an AI-generated transcript from your voice message. You can now edit it and send it via WhatsApp.");
+      setTranscript('');
+      recognitionRef.current.start();
+      setIsRecording(true);
     }
   };
 
@@ -75,7 +108,8 @@ export default function VoiceToMessage() {
             <textarea
               value={transcript}
               onChange={(e) => setTranscript(e.target.value)}
-              className="w-full min-h-[150px] bg-muted/30 rounded-2xl p-6 outline-none border border-transparent focus:border-[var(--primary)] transition-all text-base leading-relaxed"
+              placeholder="Your transcribed text will appear here..."
+              className="w-full min-h-[250px] bg-muted/40 dark:bg-muted/10 rounded-2xl p-6 outline-none border border-border focus:border-[var(--primary)] transition-all text-lg leading-relaxed text-foreground dark:text-white placeholder:text-muted-foreground/50"
             />
           </motion.div>
         )}
