@@ -4,23 +4,23 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MessageSquare, 
-  LayoutDashboard, 
-  Settings, 
-  Menu, 
-  X, 
-  Link as LinkIcon, 
-  QrCode, 
-  MousePointerClick, 
-  Type, 
-  Scissors, 
-  Share2, 
-  Package, 
-  Mic, 
-  LayoutTemplate, 
-  Clock, 
-  Store, 
+import {
+  MessageSquare,
+  LayoutDashboard,
+  Settings,
+  Menu,
+  X,
+  Link as LinkIcon,
+  QrCode,
+  MousePointerClick,
+  Type,
+  Scissors,
+  Share2,
+  Package,
+  Mic,
+  LayoutTemplate,
+  Clock,
+  Store,
   BookOpen,
   Wand2,
   Sparkles,
@@ -86,9 +86,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </AnimatePresence>
 
       <aside
-        className={`fixed top-0 left-0 z-50 h-screen w-64 bg-card border-r border-border overflow-y-auto transition-transform lg:translate-x-0 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        }`}
+        className={`fixed top-0 left-0 z-50 h-screen w-64 bg-card border-r border-border overflow-y-auto transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          }`}
       >
         <div className="p-6 border-b border-border hidden lg:block">
           <Link href="/" className="flex items-center space-x-3 group">
@@ -108,11 +107,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-2 px-2 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === item.href
+                  className={`flex items-center space-x-2 px-2 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === item.href
                       ? `bg-[var(--primary)]/10 text-[var(--primary)]`
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   <item.icon className="w-5 h-5" />
                   <span>{item.name}</span>
@@ -128,11 +126,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-2 px-2 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === item.href
+                  className={`flex items-center space-x-2 px-2 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === item.href
                       ? `bg-[var(--primary)]/10 text-[var(--primary)]`
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   <item.icon className="w-5 h-5" />
                   <span>{item.name}</span>
@@ -148,11 +145,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-2 px-2 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === item.href
+                  className={`flex items-center space-x-2 px-2 py-2 rounded-lg text-sm font-medium transition-colors ${pathname === item.href
                       ? `bg-[var(--primary)]/10 text-[var(--primary)]`
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   <item.icon className="w-5 h-5" />
                   <span>{item.name}</span>
@@ -173,7 +169,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             >
               <Menu className="w-6 h-6" />
             </button>
-            <Link 
+            <Link
               href="/"
               className="flex items-center space-x-2 text-sm font-medium text-muted-foreground hover:text-[var(--primary)] transition-colors group"
             >
@@ -181,7 +177,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <span>Back to Library</span>
             </Link>
           </div>
-          
+
           <div className="hidden sm:flex items-center space-x-2 text-xs font-medium text-muted-foreground/60">
             <span>Tools</span>
             <span>/</span>
@@ -189,8 +185,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        {/* pt-24 = ample breathing room to prevent content from sticking to the fixed header */}
-        <main className="flex-1 flex flex-col pt-24 pb-12 p-4 md:p-8 lg:p-12 overflow-x-hidden">
+        {/* pt-32 = Large breathing room so icons and titles are never cramped under the fixed header */}
+        <main className=" flex-1 flex flex-col pt-32 pb-12 p-4 md:p-8 lg:p-12 mt-5 overflow-x-hidden">
           <div className="w-full max-w-5xl mx-auto flex-1 h-full">
             {children}
           </div>
