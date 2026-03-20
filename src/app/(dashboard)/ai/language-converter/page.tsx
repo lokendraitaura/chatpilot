@@ -8,7 +8,17 @@ import { Button } from '@/components/ui/button';
 import { useCopy } from '@/hooks/useCopy';
 
 const LANGUAGES = [
-  'Hindi', 'English', 'Spanish', 'French', 'German', 'Arabic', 'Bengali', 'Marathi', 'Telugu', 'Tamil', 'Gujarati'
+  'Afrikaans', 'Albanian', 'Amharic', 'Arabic', 'Armenian', 'Azerbaijani', 'Basque', 'Bengali', 'Bosnian', 'Bulgarian',
+  'Catalan', 'Cebuano', 'Chichewa', 'Chinese (Simplified)', 'Chinese (Traditional)', 'Corsican', 'Croatian', 'Czech', 'Danish', 'Dutch',
+  'English', 'Esperanto', 'Estonian', 'Filipino', 'Finnish', 'French', 'Frisian', 'Galician', 'Georgian', 'German',
+  'Greek', 'Gujarati', 'Haitian Creole', 'Hausa', 'Hawaiian', 'Hebrew', 'Hindi', 'Hmong', 'Hungarian', 'Icelandic',
+  'Igbo', 'Indonesian', 'Irish', 'Italian', 'Japanese', 'Javanese', 'Kannada', 'Kazakh', 'Khmer', 'Kinyarwanda',
+  'Korean', 'Kurdish (Kurmanji)', 'Kyrgyz', 'Lao', 'Latin', 'Latvian', 'Lithuanian', 'Luxembourgish', 'Macedonian', 'Malagasy',
+  'Malay', 'Malayalam', 'Maltese', 'Maori', 'Marathi', 'Mongolian', 'Myanmar (Burmese)', 'Nepali', 'Norwegian', 'Odia (Oriya)',
+  'Pashto', 'Persian', 'Polish', 'Portuguese', 'Punjabi', 'Romanian', 'Russian', 'Samoan', 'Scots Gaelic', 'Serbian',
+  'Sesotho', 'Shona', 'Sindhi', 'Sinhala', 'Slovak', 'Slovenian', 'Somali', 'Spanish', 'Sundanese', 'Swahili',
+  'Swedish', 'Tajik', 'Tamil', 'Tatar', 'Telugu', 'Thai', 'Turkish', 'Turkmen', 'Ukrainian', 'Urdu',
+  'Uyghur', 'Uzbek', 'Vietnamese', 'Welsh', 'Xhosa', 'Yiddish', 'Yoruba', 'Zulu'
 ];
 
 export default function LanguageConverterPage() {
@@ -60,12 +70,12 @@ export default function LanguageConverterPage() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message here..."
-                className="w-full h-32 p-4 rounded-2xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all resize-none"
+                className="w-full h-32 md:min-h-[300px] p-4 rounded-2xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all resize-none"
               />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Select Target Language</label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
                 {LANGUAGES.map((lang) => (
                   <button
                     key={lang}

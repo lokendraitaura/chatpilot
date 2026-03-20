@@ -2,38 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { BookOpen, ArrowRight, Clock, User } from 'lucide-react';
+import * as Icons from 'lucide-react';
 // DashboardLayout removed - handled by (dashboard)/layout.tsx
 import Link from 'next/link';
 
-const BLOG_POSTS = [
-  {
-    slug: 'how-to-create-whatsapp-link',
-    title: 'How to Create a WhatsApp Link for Your Business',
-    excerpt: 'Learn the step-by-step process of creating custom WhatsApp links to make it easier for customers to contact you.',
-    date: 'March 15, 2026',
-    author: 'ChatPilot Team',
-    readTime: '5 min read',
-    category: 'Guides',
-  },
-  {
-    slug: 'whatsapp-marketing-tips',
-    title: '10 Essential WhatsApp Marketing Tips for Small Businesses',
-    excerpt: 'Boost your sales and customer engagement with these proven WhatsApp marketing strategies and techniques.',
-    date: 'March 12, 2026',
-    author: 'Marketing Expert',
-    readTime: '8 min read',
-    category: 'Marketing',
-  },
-  {
-    slug: 'best-whatsapp-message-templates',
-    title: 'Top 50 WhatsApp Message Templates for Every Situation',
-    excerpt: 'Save time with our curated list of professional WhatsApp templates for sales, support, and announcements.',
-    date: 'March 10, 2026',
-    author: 'Support Lead',
-    readTime: '12 min read',
-    category: 'Templates',
-  },
-];
+import { BLOG_POSTS } from '@/lib/blog-data';
 
 export default function BlogPage() {
   return (
@@ -55,14 +28,24 @@ export default function BlogPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {BLOG_POSTS.map((post, idx) => (
             <motion.div
-              key={post.slug}
+              key={post.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
               className="group bg-card border border-border rounded-3xl overflow-hidden hover:shadow-xl hover:border-[var(--primary)] transition-all flex flex-col"
             >
-              <div className="h-48 bg-muted group-hover:bg-[var(--primary)]/5 transition-colors flex items-center justify-center p-8 text-center">
-                 <span className="text-2xl font-bold opacity-20 group-hover:opacity-100 transition-opacity">ChatPilot Insights</span>
+              <div 
+                className="h-48 relative overflow-hidden bg-muted group-hover:opacity-90 transition-opacity"
+              >
+                 <img 
+                   src={post.image} 
+                   alt={`${post.title} thumbnail`}
+                   className="w-full h-full object-cover object-top"
+                 />
+                 <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />
+                 <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold bg-white/90 text-black backdrop-blur-md px-4 py-2 rounded-xl opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-xl border border-white/50 z-10">
+                   Read Guide
+                 </span>
               </div>
               <div className="p-8 space-y-4 flex-1 flex flex-col">
                 <div className="flex items-center gap-4 text-xs font-bold text-[var(--primary)] uppercase tracking-wider">
@@ -79,10 +62,10 @@ export default function BlogPage() {
                 <div className="pt-6 mt-auto border-t border-border flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <User className="w-3 h-3" />
-                    <span>{post.author}</span>
+                    <span>ChatPilot Team</span>
                   </div>
                   <Link 
-                    href={`/blog/${post.slug}`}
+                    href={`/blog/${post.id}`}
                     className="flex items-center gap-2 text-[var(--primary)] font-bold text-sm hover:underline"
                   >
                     Read More

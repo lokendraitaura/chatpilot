@@ -6,32 +6,9 @@ import { MessageSquare, Copy, CheckCircle2, Wand2, Calendar, Clock, Briefcase, S
 import { Button } from '@/components/ui/button';
 // DashboardLayout removed - handled by (dashboard)/layout.tsx
 
-const TEMPLATES = [
-  {
-    id: 'out-of-office',
-    title: 'Out of Office',
-    icon: Briefcase,
-    content: "Hi there! 👋 Thanks for your message. I'm currently away from the office until [Date]. If your request is urgent, please contact [Email/Phone]. Otherwise, I'll get back to you as soon as I return. Best regards!",
-  },
-  {
-    id: 'after-hours',
-    title: 'After Hours',
-    icon: Clock,
-    content: "Hello! Our business hours are [Time] to [Time], [Days]. We've received your message and will reply as soon as we open. Have a great day! 🏢",
-  },
-  {
-    id: 'holiday',
-    title: 'Holiday/Vacation',
-    icon: Calendar,
-    content: "Happy Holidays! 🎄 We are currently closed for [Holiday Name] and will reopen on [Date]. Thank you for your patience and we look forward to connecting soon!",
-  },
-  {
-    id: 'instant-reply',
-    title: 'Instant Support',
-    icon: Send,
-    content: "Hi! Thanks for reaching out to us. 🚀 This is an automated reply to let you know we've received your message. One of our human agents will be with you shortly. Your ticket number is #[Number].",
-  }
-];
+import { TEMPLATES } from '@/lib/generated-auto-replies';
+
+const iconMap: Record<string, any> = { Briefcase, Clock, Calendar, Send, MessageSquare, Sparkles };
 
 export default function AutoReplyGenerator() {
   const [selectedTemplate, setSelectedTemplate] = useState(TEMPLATES[0]);
@@ -98,8 +75,10 @@ export default function AutoReplyGenerator() {
                   <LayoutGrid className="w-4 h-4" />
                   Select A Template
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {TEMPLATES.map((t) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-2">
+                  {TEMPLATES.map((t) => {
+                    const IconCmp = iconMap[t.iconName] || MessageSquare;
+                    return (
                     <button
                       key={t.id}
                       onClick={() => handleTemplateSelect(t)}
@@ -109,10 +88,11 @@ export default function AutoReplyGenerator() {
                           : 'border-transparent bg-muted/50 hover:bg-muted text-muted-foreground'
                       }`}
                     >
-                      <t.icon className="w-5 h-5 shrink-0" />
+                      <IconCmp className="w-5 h-5 shrink-0" />
                       <span className="font-bold text-xs">{t.title}</span>
                     </button>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 

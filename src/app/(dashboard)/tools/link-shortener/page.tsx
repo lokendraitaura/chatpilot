@@ -20,12 +20,35 @@ export default function LinkShortenerPage() {
     setShortened('');
 
     try {
-      // TinyURL free API - no auth required
-      const apiUrl = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(url)}`;
-      const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error('Failed to shorten URL');
-      const shortUrl = await response.text();
-      if (!shortUrl.startsWith('http')) throw new Error('Invalid response from shortener');
+      let finalUrl = url.trim();
+      if (!finalUrl.startsWith('http')) {
+        finalUrl = 'https://' + finalUrl;
+      }
+
+      // Try multiple shorteners as fallbacks
+      const shorteners = [
+        { name: 'is.gd', url: `https://is.gd/create.php?format=simple&url=${encodeURIComponent(finalUrl)}` },
+        { name: 'v.gd', url: `https://v.gd/create.php?format=simple&url=${encodeURIComponent(finalUrl)}` },
+        { name: 'tinyurl', url: `https://tinyurl.com/api-create.php?url=${encodeURIComponent(finalUrl)}` }
+      ];
+
+      let shortUrl = '';
+      for (const service of shorteners) {
+        try {
+          const response = await fetch(service.url);
+          if (response.ok) {
+            shortUrl = await response.text();
+            if (shortUrl.startsWith('http')) break;
+          }
+        } catch (e) {
+          continue;
+        }
+      }
+
+      if (!shortUrl || !shortUrl.startsWith('http')) {
+        throw new Error('All shortening services failed');
+      }
+
       setShortened(shortUrl.trim());
     } catch (err) {
       setError('Could not shorten this URL. Please check that it\'s a valid URL and try again.');

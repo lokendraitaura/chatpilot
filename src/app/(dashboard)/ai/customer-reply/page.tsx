@@ -1,24 +1,50 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkles, Copy, Check, RefreshCw, MessageCircle, LayoutGrid, Heart, Briefcase, Users, Send } from 'lucide-react';
+import { Sparkles, Copy, Check, RefreshCw, MessageCircle, LayoutGrid, Heart, Briefcase, Users, Send, Smile, Shield, Clock, User, Zap, Search, HelpCircle, Target, Coffee, Minus, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCopy } from '@/hooks/useCopy';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CustomerReplyPage() {
   const [customerMessage, setCustomerMessage] = useState('');
-  const [tone, setTone] = useState<'helpful' | 'apologetic' | 'professional' | 'friendly'>('helpful');
+  const [tone, setTone] = useState<string>('helpful');
   const [context, setContext] = useState('');
   const [generatedReply, setGeneratedReply] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const { copied, copy } = useCopy();
 
   const tones = [
-    { value: 'helpful' as const, label: 'Helpful', icon: Heart, desc: 'Supportive & kind' },
-    { value: 'apologetic' as const, label: 'Apologetic', icon: Users, desc: 'Empathetic & sorry' },
-    { value: 'professional' as const, label: 'Professional', icon: Briefcase, desc: 'Formal & official' },
-    { value: 'friendly' as const, label: 'Friendly', icon: Send, desc: 'Warm & casual' },
+    { value: 'helpful', label: 'Helpful', icon: Heart, desc: 'Supportive & kind' },
+    { value: 'apologetic', label: 'Apologetic', icon: Users, desc: 'Empathetic & sorry' },
+    { value: 'professional', label: 'Professional', icon: Briefcase, desc: 'Formal & official' },
+    { value: 'friendly', label: 'Friendly', icon: Send, desc: 'Warm & casual' },
+    { value: 'empathetic', label: 'Empathetic', icon: Heart, desc: 'Deep understanding' },
+    { value: 'direct', label: 'Direct', icon: Send, desc: 'Clear & concise' },
+    { value: 'reassuring', label: 'Reassuring', icon: Heart, desc: 'Comforting' },
+    { value: 'urgent', label: 'Urgent', icon: Briefcase, desc: 'Immediate action' },
+    { value: 'educational', label: 'Educational', icon: Users, desc: 'Guiding & teaching' },
+    { value: 'diplomatic', label: 'Diplomatic', icon: Briefcase, desc: 'Careful & tactful' },
+    { value: 'enthusiastic', label: 'Enthusiastic', icon: Sparkles, desc: 'High energy' },
+    { value: 'humorous', label: 'Humorous', icon: Smile, desc: 'Funny & light' },
+    { value: 'firm', label: 'Firm', icon: Shield, desc: 'Strict & decisive' },
+    { value: 'patient', label: 'Patient', icon: Clock, desc: 'Taking time' },
+    { value: 'respectful', label: 'Respectful', icon: User, desc: 'Very polite' },
+    { value: 'assertive', label: 'Assertive', icon: Zap, desc: 'Confident' },
+    { value: 'curious', label: 'Curious', icon: Search, desc: 'Asking more' },
+    { value: 'grateful', label: 'Grateful', icon: Heart, desc: 'Thankful' },
+    { value: 'conciliatory', label: 'Conciliatory', icon: Users, desc: 'Peace-making' },
+    { value: 'skeptical', label: 'Skeptical', icon: HelpCircle, desc: 'Doubtful' },
+    { value: 'persuasive', label: 'Persuasive', icon: Target, desc: 'Convincing' },
+    { value: 'vibrant', label: 'Vibrant', icon: Sparkles, desc: 'Lively' },
+    { value: 'calm', label: 'Calm', icon: Coffee, desc: 'Relaxed' },
+    { value: 'authoritative', label: 'Authoritative', icon: Shield, desc: 'Commanding' },
+    { value: 'supportive', label: 'Supportive', icon: Heart, desc: 'Backing up' },
+    { value: 'witty', label: 'Witty', icon: Zap, desc: 'Clever reply' },
+    { value: 'bold', label: 'Bold', icon: Zap, desc: 'Fearless' },
+    { value: 'minimalist', label: 'Minimalist', icon: Minus, desc: 'Very short' },
+    { value: 'detailed', label: 'Detailed', icon: FileText, desc: 'Full info' },
+    { value: 'sincere', label: 'Sincere', icon: Heart, desc: 'Genuine' },
   ];
 
   const generateReply = async () => {
@@ -81,7 +107,7 @@ export default function CustomerReplyPage() {
                   <Sparkles className="w-4 h-4" />
                   Select Response Tone
                 </h2>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                   {tones.map((t) => (
                     <button
                       key={t.value}

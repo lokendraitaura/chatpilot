@@ -1,6 +1,6 @@
 export interface AIMessageRequest {
   purpose: string;
-  tone: 'professional' | 'friendly' | 'casual' | 'formal' | 'enthusiastic' | 'persuasive';
+  tone: string;
   length?: 'short' | 'medium' | 'long';
   context?: string;
 }
@@ -12,7 +12,7 @@ export interface AIMessageResponse {
 
 export interface AIImproveRequest {
   message: string;
-  improvementType: 'professional' | 'friendly' | 'concise' | 'detailed' | 'persuasive' | 'apologetic';
+  improvementType: string;
 }
 
 export interface AITranslateRequest {
@@ -30,5 +30,5 @@ export interface EmojiSuggestion {
 export interface CustomerReplyContext {
   customerMessage: string;
   businessContext?: string;
-  tone: 'helpful' | 'apologetic' | 'professional' | 'friendly';
+  tone: string;
 }

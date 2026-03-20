@@ -21,7 +21,15 @@ import {
   LayoutTemplate, 
   Clock, 
   Store, 
-  BookOpen 
+  BookOpen,
+  Wand2,
+  Sparkles,
+  PenTool,
+  MessageCircle,
+  Users,
+  Languages,
+  Smile,
+  Image as ImageIcon
 } from 'lucide-react';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { Logo } from '@/components/ui/Logo';
@@ -41,15 +49,15 @@ const TOOLS = [
 ];
 
 const AI_TOOLS = [
-  { name: 'Message Gen', href: '/ai/message-generator', icon: MessageSquare },
-  { name: 'Improver', href: '/ai/message-improver', icon: MessageSquare },
-  { name: 'Marketing Copy', href: '/ai/marketing-copy', icon: MessageSquare },
-  { name: 'CTA Gen', href: '/ai/cta-generator', icon: MessageSquare },
-  { name: 'Personalizer', href: '/ai/message-personalizer', icon: MessageSquare },
-  { name: 'Translator', href: '/ai/language-converter', icon: MessageSquare },
-  { name: 'Emoji Suggest', href: '/ai/emoji-suggester', icon: MessageSquare },
+  { name: 'Message Gen', href: '/ai/message-generator', icon: Wand2 },
+  { name: 'Improver', href: '/ai/message-improver', icon: Sparkles },
+  { name: 'Marketing Copy', href: '/ai/marketing-copy', icon: PenTool },
+  { name: 'CTA Gen', href: '/ai/cta-generator', icon: MessageCircle },
+  { name: 'Personalizer', href: '/ai/message-personalizer', icon: Users },
+  { name: 'Translator', href: '/ai/language-converter', icon: Languages },
+  { name: 'Emoji Suggest', href: '/ai/emoji-suggester', icon: Smile },
   { name: 'Customer Reply', href: '/ai/customer-reply', icon: MessageSquare },
-  { name: 'Status Caption', href: '/ai/status-caption', icon: MessageSquare },
+  { name: 'Status Caption', href: '/ai/status-caption', icon: ImageIcon },
 ];
 
 const mainNavigation = [
@@ -156,7 +164,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="lg:pl-64 flex flex-col min-h-screen">
-        <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-4 md:px-8 bg-background/50 backdrop-blur-md border-b border-border transition-all">
+        {/* Fixed header - always stays at top, offset by sidebar on desktop */}
+        <header className="fixed top-0 left-0 right-0 lg:left-64 z-40 flex items-center justify-between h-14 px-4 md:px-8 bg-background border-b border-border shadow-sm">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -180,7 +189,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1 flex flex-col p-4 md:p-8 lg:p-12">
+        {/* pt-14 = header height compensation so content doesn't hide behind fixed header */}
+        <main className="flex-1 flex flex-col pt-14 p-4 md:p-8 lg:p-12 overflow-x-hidden">
           <div className="w-full max-w-5xl mx-auto flex-1 h-full">
             {children}
           </div>

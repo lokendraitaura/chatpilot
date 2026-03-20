@@ -23,76 +23,7 @@ export const THEMES = [
   { id: 'mint', name: 'Mint Fresh', primary: '#34D399', secondary: '#10B981' },
 ];
 
-export const MESSAGE_TEMPLATES = {
-  business: [
-    {
-      title: 'Meeting Request',
-      template: 'Hi! I would like to schedule a meeting to discuss [topic]. Are you available on [date/time]?',
-      category: 'business',
-    },
-    {
-      title: 'Follow Up',
-      template: 'Hello! Following up on our previous conversation about [topic]. Looking forward to your response.',
-      category: 'business',
-    },
-    {
-      title: 'Product Inquiry',
-      template: 'Hi! I\'m interested in learning more about your [product/service]. Can you share more details?',
-      category: 'business',
-    },
-  ],
-  customer: [
-    {
-      title: 'Order Confirmation',
-      template: 'Thank you for your order! Your order #[ORDER_ID] has been confirmed and will be delivered by [DATE].',
-      category: 'customer',
-    },
-    {
-      title: 'Support Response',
-      template: 'Thank you for contacting us! We\'ve received your query and will get back to you within 24 hours.',
-      category: 'customer',
-    },
-    {
-      title: 'Appointment Reminder',
-      template: 'This is a reminder for your appointment on [DATE] at [TIME]. Reply CONFIRM to confirm.',
-      category: 'customer',
-    },
-  ],
-  marketing: [
-    {
-      title: 'Special Offer',
-      template: '🎉 Special Offer Alert! Get [DISCOUNT]% off on [PRODUCT]. Limited time only! Shop now: [LINK]',
-      category: 'marketing',
-    },
-    {
-      title: 'New Product Launch',
-      template: '🚀 Exciting News! We just launched [PRODUCT]. Be the first to try it. Check it out: [LINK]',
-      category: 'marketing',
-    },
-    {
-      title: 'Event Invitation',
-      template: '🎊 You\'re invited to [EVENT] on [DATE]. Join us for an amazing experience! RSVP: [LINK]',
-      category: 'marketing',
-    },
-  ],
-  personal: [
-    {
-      title: 'Birthday Wish',
-      template: '🎂 Happy Birthday [NAME]! Wishing you a wonderful day filled with joy and happiness! 🎉',
-      category: 'personal',
-    },
-    {
-      title: 'Thank You',
-      template: 'Thank you so much for [REASON]! I really appreciate your help and support. 🙏',
-      category: 'personal',
-    },
-    {
-      title: 'Congratulations',
-      template: '🎊 Congratulations on [ACHIEVEMENT]! You totally deserve this success! So proud of you! 🌟',
-      category: 'personal',
-    },
-  ],
-};
+export { MESSAGE_TEMPLATES } from './generated-templates';
 
 export const FORMATTING_OPTIONS = [
   { label: 'Bold', syntax: '*text*', example: '*bold*' },

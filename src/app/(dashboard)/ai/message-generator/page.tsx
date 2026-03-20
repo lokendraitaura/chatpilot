@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkles, Copy, Check, MessageSquare, Send, Heart, Briefcase, Users, LayoutGrid, Info } from 'lucide-react';
+import { Sparkles, Copy, Check, MessageSquare, Send, Heart, Briefcase, Users, LayoutGrid, Info, Smile, Zap, Target, Minus, HelpCircle, Shield, User, MessageCircle } from 'lucide-react';
 import { useCopy } from '@/hooks/useCopy';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 export default function MessageGeneratorPage() {
   const [purpose, setPurpose] = useState('');
-  const [tone, setTone] = useState<'professional' | 'friendly' | 'casual' | 'formal' | 'enthusiastic' | 'persuasive'>('professional');
+  const [tone, setTone] = useState<string>('professional');
   const [context, setContext] = useState('');
   const [generatedMessage, setGeneratedMessage] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -22,6 +22,30 @@ export default function MessageGeneratorPage() {
     { value: 'formal', label: 'Formal', icon: Briefcase, desc: 'Strict & serious' },
     { value: 'enthusiastic', label: 'Enthusiastic', icon: Sparkles, desc: 'High energy' },
     { value: 'persuasive', label: 'Persuasive', icon: Users, desc: 'Action focused' },
+    { value: 'urgent', label: 'Urgent', icon: Briefcase, desc: 'Time-sensitive' },
+    { value: 'empathetic', label: 'Empathetic', icon: Heart, desc: 'Understanding' },
+    { value: 'direct', label: 'Direct', icon: Send, desc: 'Straight to point' },
+    { value: 'educational', label: 'Educational', icon: Sparkles, desc: 'Informative' },
+    { value: 'witty', label: 'Witty', icon: Users, desc: 'Clever & sharp' },
+    { value: 'diplomatic', label: 'Diplomatic', icon: Users, desc: 'Tactful approach' },
+    { value: 'humorous', label: 'Humorous', icon: Smile, desc: 'Lighthearted' },
+    { value: 'sarcastic', label: 'Sarcastic', icon: Smile, desc: 'Dry humor' },
+    { value: 'bold', label: 'Bold', icon: Zap, desc: 'Strong & clear' },
+    { value: 'calm', label: 'Calm', icon: Heart, desc: 'Peaceful' },
+    { value: 'assertive', label: 'Assertive', icon: Zap, desc: 'Confident' },
+    { value: 'supportive', label: 'Supportive', icon: Heart, desc: 'Helpful' },
+    { value: 'salesy', label: 'Salesy', icon: Target, desc: 'Conversion focused' },
+    { value: 'storytelling', label: 'Storytelling', icon: Users, desc: 'Narrative' },
+    { value: 'minimalist', label: 'Minimalist', icon: Minus, desc: 'Very concise' },
+    { value: 'mysterious', label: 'Mysterious', icon: HelpCircle, desc: 'Intriguing' },
+    { value: 'authoritative', label: 'Authoritative', icon: Shield, desc: 'Expert tone' },
+    { value: 'reassuring', label: 'Reassuring', icon: Shield, desc: 'Comforting' },
+    { value: 'playful', label: 'Playful', icon: Smile, desc: 'Fun focused' },
+    { value: 'humble', label: 'Humble', icon: User, desc: 'Modest' },
+    { value: 'corporate', label: 'Corporate', icon: Briefcase, desc: 'Office style' },
+    { value: 'inspirational', label: 'Inspirational', icon: Zap, desc: 'Visionary' },
+    { value: 'conversational', label: 'Conversational', icon: MessageCircle, desc: 'Natural flow' },
+    { value: 'firm', label: 'Firm', icon: Shield, desc: 'Unwavering' },
   ];
 
   const generateMessage = async () => {
@@ -84,7 +108,7 @@ export default function MessageGeneratorPage() {
                   <Sparkles className="w-4 h-4" />
                   Desired Tone
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                   {tones.map((t) => (
                     <button
                       key={t.value}

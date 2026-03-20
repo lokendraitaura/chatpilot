@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkles, Copy, Check, Image as ImageIcon, RefreshCw, LayoutGrid, Info, Heart, Briefcase, Zap, Smile, Send } from 'lucide-react';
+import { Sparkles, Copy, Check, Image as ImageIcon, RefreshCw, LayoutGrid, Info, Heart, Briefcase, Zap, Smile, Send, Minus, Laugh, Skull, User, Globe, Clock, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCopy } from '@/hooks/useCopy';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function StatusCaptionPage() {
   const [topic, setTopic] = useState('');
-  const [tone, setTone] = useState<'witty' | 'inspirational' | 'promotional' | 'casual'>('witty');
+  const [tone, setTone] = useState<string>('witty');
   const [generatedCaption, setGeneratedCaption] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const { copied, copy } = useCopy();
@@ -18,6 +18,15 @@ export default function StatusCaptionPage() {
     { value: 'inspirational' as const, label: 'Inspirational', icon: Heart, desc: 'Deep & meaningful' },
     { value: 'promotional' as const, label: 'Promotional', icon: Briefcase, desc: 'Sales focused' },
     { value: 'casual' as const, label: 'Casual', icon: Smile, desc: 'Simple & easy' },
+    { value: 'emotional' as const, label: 'Emotional', icon: Heart, desc: 'Heartfelt' },
+    { value: 'sarcastic' as const, label: 'Sarcastic', icon: Smile, desc: 'Dry humor' },
+    { value: 'professional' as const, label: 'Professional', icon: Briefcase, desc: 'Formal' },
+    { value: 'adventurous' as const, label: 'Adventurous', icon: Globe, desc: 'Travel focused' },
+    { value: 'nostalgic' as const, label: 'Nostalgic', icon: Clock, desc: 'Old memories' },
+    { value: 'bold' as const, label: 'Bold', icon: Zap, desc: 'Strong' },
+    { value: 'storytelling' as const, label: 'Storytelling', icon: BookOpen, desc: 'Narrative' },
+    { value: 'sassy' as const, label: 'Sassy', icon: User, desc: 'With attitude' },
+    { value: 'thoughtful' as const, label: 'Thoughtful', icon: User, desc: 'Reflective' },
   ];
 
   const generateCaption = async () => {
@@ -81,7 +90,7 @@ export default function StatusCaptionPage() {
                   <Sparkles className="w-4 h-4" />
                   Caption Style
                 </h2>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                   {tones.map((t) => (
                     <button
                       key={t.value}

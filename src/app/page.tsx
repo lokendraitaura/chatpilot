@@ -7,7 +7,7 @@ import { HowItWorks } from '@/components/landing/HowItWorks';
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen pt-16">
       <Navbar />
       <Hero />
       <ToolsSection />

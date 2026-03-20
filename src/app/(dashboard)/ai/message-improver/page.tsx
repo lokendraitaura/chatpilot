@@ -12,6 +12,46 @@ const TONE_OPTIONS = [
   { value: 'persuasive', label: 'Persuasive', emoji: '🎯' },
   { value: 'urgent', label: 'Urgent', emoji: '⚡' },
   { value: 'empathetic', label: 'Empathetic', emoji: '🤝' },
+  { value: 'casual', label: 'Casual', emoji: '☕' },
+  { value: 'formal', label: 'Formal', emoji: '🎩' },
+  { value: 'enthusiastic', label: 'Enthusiastic', emoji: '🌟' },
+  { value: 'witty', label: 'Witty', emoji: '🤓' },
+  { value: 'direct', label: 'Direct', emoji: '🎯' },
+  { value: 'apologetic', label: 'Apologetic', emoji: '🙏' },
+  { value: 'diplomatic', label: 'Diplomatic', emoji: '🕊️' },
+  { value: 'conversational', label: 'Conversational', emoji: '💬' },
+  { value: 'inspirational', label: 'Inspirational', emoji: '✨' },
+  { value: 'humorous', label: 'Humorous', emoji: '😂' },
+  { value: 'sarcastic', label: 'Sarcastic', emoji: '😏' },
+  { value: 'bold', label: 'Bold', emoji: '💪' },
+  { value: 'calm', label: 'Calm', emoji: '🌊' },
+  { value: 'concise', label: 'Concise', emoji: '✂️' },
+  { value: 'detailed', label: 'Detailed', emoji: '📝' },
+  { value: 'humble', label: 'Humble', emoji: '🙏' },
+  { value: 'arrogant', label: 'Arrogant', emoji: '👑' },
+  { value: 'hopeful', label: 'Hopeful', emoji: '🌈' },
+  { value: 'confident', label: 'Confident', emoji: '🦁' },
+  { value: 'curious', label: 'Curious', emoji: '🤔' },
+  { value: 'excited', label: 'Excited', emoji: '🎉' },
+  { value: 'grateful', label: 'Grateful', emoji: '💖' },
+  { value: 'playful', label: 'Playful', emoji: '🎈' },
+  { value: 'poetic', label: 'Poetic', emoji: '✒️' },
+  { value: 'storytelling', label: 'Storytelling', emoji: '📖' },
+  { value: 'corporate', label: 'Corporate', emoji: '🏙️' },
+  { value: 'salesy', label: 'Salesy', emoji: '💰' },
+  { value: 'educational', label: 'Educational', emoji: '🎓' },
+  { value: 'mysterious', label: 'Mysterious', emoji: '🕵️' },
+  { value: 'authoritative', label: 'Authoritative', emoji: '⚖️' },
+  { value: 'helpful', label: 'Helpful', emoji: '🙋' },
+  { value: 'romantic', label: 'Romantic', emoji: '🌹' },
+  { value: 'skeptical', label: 'Skeptical', emoji: '🤨' },
+  { value: 'assertive', label: 'Assertive', emoji: '🔊' },
+  { value: 'funny', label: 'Funny', emoji: '😂' },
+  { value: 'motivational', label: 'Motivational', emoji: '⚡' },
+  { value: 'mystical', label: 'Mystical', emoji: '🔮' },
+  { value: 'nostalgic', label: 'Nostalgic', emoji: '🎞️' },
+  { value: 'chill', label: 'Chill', emoji: '🥤' },
+  { value: 'savage', label: 'Savage', emoji: '💀' },
 ];
 
 export default function MessageImprover() {
@@ -90,7 +130,7 @@ export default function MessageImprover() {
 
             <div className="space-y-3">
               <label className="text-sm font-semibold">Select Tone</label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                 {TONE_OPTIONS.map((tone) => (
                   <button
                     key={tone.value}

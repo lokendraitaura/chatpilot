@@ -1,0 +1,636 @@
+﻿commit 4412b4a5514934e627f634e3fe0a4f61f67100ff
+Author: lokendraitaura <lokendraitaura@gmail.com>
+Date:   Tue Mar 17 23:13:47 2026 +0530
+
+    Fix: Applied all 8 production bug fixes (Landing, Footer, Settings, Country Codes, QR fix, Button fix, Link Shortener API)
+
+diff --git a/src/app/(dashboard)/tools/button-generator/page.tsx b/src/app/(dashboard)/tools/button-generator/page.tsx
+index 2c3d661..b61a3bf 100644
+--- a/src/app/(dashboard)/tools/button-generator/page.tsx
++++ b/src/app/(dashboard)/tools/button-generator/page.tsx
+@@ -1,20 +1,27 @@
+ 'use client';
+ 
+ import { useState } from 'react';
+-import { Copy, Check, Code, Phone, MousePointerClick } from 'lucide-react';
++import { Copy, Check, Code, Phone, MousePointerClick, ChevronDown, AlertCircle, CheckCircle2 } from 'lucide-react';
+ import { generateWhatsAppLink } from '@/lib/whatsapp';
+ import { useCopy } from '@/hooks/useCopy';
+ import { motion, AnimatePresence } from 'framer-motion';
+ import { Button } from '@/components/ui/button';
++import { COUNTRY_CODES, DEFAULT_COUNTRY, validatePhoneNumber, type CountryCode } from '@/lib/countryCodes';
+ 
+ export default function ButtonGeneratorPage() {
++  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
+   const [phoneNumber, setPhoneNumber] = useState('');
+   const [text, setText] = useState('Chat on WhatsApp');
+   const [color, setColor] = useState('#25D366');
++  const [showDropdown, setShowDropdown] = useState(false);
+   const { copied, copy } = useCopy();
+ 
+-  const whatsappLink = generateWhatsAppLink(phoneNumber);
+-  const embedCode = `<a href="${whatsappLink}" style="background-color: ${color}; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; font-weight: bold; font-family: sans-serif;">
++  const fullPhone = phoneNumber ? `${selectedCountry.digits}${phoneNumber.replace(/\D/g, '')}` : '';
++  const whatsappLink = generateWhatsAppLink(fullPhone);
++  const validation = validatePhoneNumber(phoneNumber, selectedCountry);
++  const isValid = phoneNumber.length > 0 && validation.valid;
++
++  const embedCode = `<a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" style="background-color: ${color}; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; font-weight: bold; font-family: sans-serif;">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 8px;" />
+   ${text}
+ </a>`;
+@@ -37,17 +44,82 @@ export default function ButtonGeneratorPage() {
+ 
+       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+         <div className="bg-card border border-border rounded-3xl p-8 shadow-sm space-y-8">
+-          <div className="space-y-4">
++          {/* Country Code + Phone */}
++          <div className="space-y-3">
+             <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+               <Phone className="w-4 h-4" /> WhatsApp Number
+             </label>
+-            <input
+-              type="tel"
+-              value={phoneNumber}
+-              onChange={(e) => setPhoneNumber(e.target.value)}
+-              placeholder="e.g. 1234567890"
+-              className="w-full p-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium"
+-            />
++            <div className="flex gap-3">
++              <div className="relative">
++                <button
++                  type="button"
++                  onClick={() => setShowDropdown(!showDropdown)}
++                  className="flex items-center gap-2 px-4 py-4 rounded-xl border-2 border-border hover:border-[var(--primary)]/50 bg-background outline-none transition-all font-medium whitespace-nowrap cursor-pointer"
++                >
++                  <span className="text-xl">{selectedCountry.flag}</span>
++                  <span className="text-sm font-bold">{selectedCountry.code}</span>
++                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
++                </button>
++                <AnimatePresence>
++                  {showDropdown && (
++                    <motion.div
++                      initial={{ opacity: 0, y: -8 }}
++                      animate={{ opacity: 1, y: 0 }}
++                      exit={{ opacity: 0, y: -8 }}
++                      className="absolute left-0 top-full mt-2 z-50 bg-card border border-border rounded-2xl shadow-xl overflow-y-auto max-h-64 min-w-[220px]"
++                    >
++                      {COUNTRY_CODES.map((country) => (
++                        <button
++                          key={`${country.name}-${country.code}`}
++                          type="button"
++                          onClick={() => { setSelectedCountry(country); setShowDropdown(false); }}
++                          className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted/50 transition-colors text-left cursor-pointer ${
++                            selectedCountry.name === country.name ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-bold' : ''
++                          }`}
++                        >
++                          <span className="text-lg">{country.flag}</span>
++                          <span className="flex-1">{country.name}</span>
++                          <span className="font-mono text-muted-foreground">{country.code}</span>
++                        </button>
++                      ))}
++                    </motion.div>
++                  )}
++                </AnimatePresence>
++              </div>
++              <div className="flex-1 relative">
++                <input
++                  type="tel"
++                  value={phoneNumber}
++                  onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
++                  placeholder={`e.g. ${'9'.repeat(selectedCountry.minLength)}`}
++                  maxLength={selectedCountry.maxLength}
++                  className={`w-full p-4 rounded-xl border-2 bg-background outline-none transition-all font-medium ${
++                    phoneNumber && !validation.valid ? 'border-red-400' :
++                    phoneNumber && validation.valid ? 'border-green-500' : 'border-border focus:border-[var(--primary)]'
++                  }`}
++                />
++                {phoneNumber && (
++                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
++                    {validation.valid
++                      ? <CheckCircle2 className="w-5 h-5 text-green-500" />
++                      : <AlertCircle className="w-5 h-5 text-red-400" />}
++                  </div>
++                )}
++              </div>
++            </div>
++            <AnimatePresence>
++              {phoneNumber && !validation.valid && (
++                <motion.p
++                  initial={{ opacity: 0, height: 0 }}
++                  animate={{ opacity: 1, height: 'auto' }}
++                  exit={{ opacity: 0, height: 0 }}
++                  className="text-xs text-red-500 flex items-center gap-1.5"
++                >
++                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
++                  {validation.message}
++                </motion.p>
++              )}
++            </AnimatePresence>
+           </div>
+ 
+           <div className="space-y-4">
+@@ -75,15 +147,24 @@ export default function ButtonGeneratorPage() {
+         </div>
+ 
+         <div className="lg:sticky lg:top-8 flex flex-col space-y-8">
+-          <div className="bg-card border border-border rounded-3xl p-10 flex flex-col items-center justify-center text-center">
+-            <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-8">Live Preview</h3>
+-            <div 
++          <div className="bg-card border border-border rounded-3xl p-10 flex flex-col items-center justify-center text-center space-y-6">
++            <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Live Preview</h3>
++            {/* Fixed: now a real clickable <a> that opens WhatsApp */}
++            <a
++              href={isValid ? whatsappLink : undefined}
++              target="_blank"
++              rel="noopener noreferrer"
+               style={{ backgroundColor: color }}
+-              className="px-8 py-4 rounded-2xl text-white font-bold flex items-center space-x-3 shadow-xl cursor-pointer hover:opacity-90 transition-opacity"
++              className={`px-8 py-4 rounded-2xl text-white font-bold flex items-center space-x-3 shadow-xl transition-opacity ${
++                isValid ? 'hover:opacity-90 cursor-pointer' : 'opacity-60 cursor-not-allowed pointer-events-none'
++              }`}
+             >
+               <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" className="w-6 h-6 invert" />
+               <span>{text}</span>
+-            </div>
++            </a>
++            {!isValid && (
++              <p className="text-xs text-muted-foreground">Enter a valid number to activate the button</p>
++            )}
+           </div>
+ 
+           <div className="bg-card border border-border rounded-3xl p-8 space-y-4">
+
+commit 12820335fa1b8d73a1c39b80f6cccb0544cc6ecd
+Author: lokendraitaura <lokendraitaura@gmail.com>
+Date:   Mon Mar 16 00:01:35 2026 +0530
+
+    Final fix for Vercel deployment: Resolved all build errors, file corruption, and type conflicts. Standardized animation imports to framer-motion.
+
+diff --git a/src/app/(dashboard)/tools/button-generator/page.tsx b/src/app/(dashboard)/tools/button-generator/page.tsx
+index 0113ae1..2c3d661 100644
+--- a/src/app/(dashboard)/tools/button-generator/page.tsx
++++ b/src/app/(dashboard)/tools/button-generator/page.tsx
+@@ -4,181 +4,106 @@ import { useState } from 'react';
+ import { Copy, Check, Code, Phone, MousePointerClick } from 'lucide-react';
+ import { generateWhatsAppLink } from '@/lib/whatsapp';
+ import { useCopy } from '@/hooks/useCopy';
+-import { motion } from 'motion/react';
+-// DashboardLayout removed - handled by (dashboard)/layout.tsx
++import { motion, AnimatePresence } from 'framer-motion';
++import { Button } from '@/components/ui/button';
+ 
+ export default function ButtonGeneratorPage() {
+-  const [phone, setPhone] = useState('');
+-  const [buttonText, setButtonText] = useState('Chat with us');
+-  const [message, setMessage] = useState('');
+-  const [buttonStyle, setButtonStyle] = useState<'default' | 'rounded' | 'pill' | 'minimal'>('default');
+-  const [buttonColor, setButtonColor] = useState('#25D366');
+-  const [textColor, setTextColor] = useState('#FFFFFF');
++  const [phoneNumber, setPhoneNumber] = useState('');
++  const [text, setText] = useState('Chat on WhatsApp');
++  const [color, setColor] = useState('#25D366');
+   const { copied, copy } = useCopy();
+ 
+-  const whatsappLink = phone ? generateWhatsAppLink(phone, message) : '#';
+-
+-  const buttonStyles = {
+-    default: 'px-6 py-3 rounded-lg',
+-    rounded: 'px-6 py-3 rounded-xl',
+-    pill: 'px-8 py-3 rounded-full',
+-    minimal: 'px-4 py-2 rounded',
+-  };
+-
+-  const generateHTML = () => {
+-    return `<!-- WhatsApp Chat Button -->
+-<a href="${whatsappLink}" 
+-   target="_blank" 
+-   style="display: inline-flex; align-items: center; gap: 8px; background-color: ${buttonColor}; color: ${textColor}; padding: 12px 24px; border-radius: ${buttonStyle === 'pill' ? '9999px' : buttonStyle === 'rounded' ? '12px' : '8px'}; text-decoration: none; font-weight: 600; transition: opacity 0.2s;">
+-  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+-  </svg>
+-  ${buttonText}
++  const whatsappLink = generateWhatsAppLink(phoneNumber);
++  const embedCode = `<a href="${whatsappLink}" style="background-color: ${color}; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; font-weight: bold; font-family: sans-serif;">
++  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20" style="margin-right: 8px;" />
++  ${text}
+ </a>`;
+-  };
+ 
+   return (
+-    <div className="space-y-8">
+-        <div className="text-center space-y-4">
+-          <motion.div
+-            initial={{ scale: 0 }}
+-            animate={{ scale: 1 }}
+-            className="w-16 h-16 mx-auto rounded-2xl gradient-primary flex items-center justify-center mb-6"
+-          >
+-            <MousePointerClick className="w-8 h-8 text-white" />
+-          </motion.div>
+-          <h1 className="text-4xl font-bold">WhatsApp Button Maker</h1>
+-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+-            Design and generate professional click-to-chat buttons for your website.
+-          </p>
+-        </div>
+-
+-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+-          {/* Configuration */}
+-          <motion.div
+-            initial={{ opacity: 0, x: -20 }}
+-            animate={{ opacity: 1, x: 0 }}
+-            className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm space-y-6"
+-          >
+-            <h2 className="text-xl font-bold border-b border-border pb-4">Configuration</h2>
+-
+-            <div className="space-y-4">
+-              <div>
+-                <label className="block text-sm font-medium mb-2 text-muted-foreground">Phone Number</label>
+-                <div className="relative">
+-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+-                  <input
+-                    type="tel"
+-                    value={phone}
+-                    onChange={(e) => setPhone(e.target.value)}
+-                    placeholder="e.g. 919876543210"
+-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-background outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all"
+-                  />
+-                </div>
+-              </div>
++    <div className="space-y-10 max-w-5xl mx-auto">
++      <div className="text-center space-y-4">
++        <motion.div
++          initial={{ scale: 0 }}
++          animate={{ scale: 1 }}
++          className="w-16 h-16 mx-auto rounded-2xl gradient-primary flex items-center justify-center mb-6"
++        >
++          <MousePointerClick className="w-8 h-8 text-white" />
++        </motion.div>
++        <h1 className="text-4xl font-bold">WhatsApp Button Maker</h1>
++        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
++          Create beautiful, high-converting WhatsApp buttons for your website. No coding required.
++        </p>
++      </div>
+ 
+-              <div>
+-                <label className="block text-sm font-medium mb-2 text-muted-foreground">Button Text</label>
+-                <input
+-                  type="text"
+-                  value={buttonText}
+-                  onChange={(e) => setButtonText(e.target.value)}
+-                  placeholder="Chat with us"
+-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all"
+-                />
+-              </div>
++      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
++        <div className="bg-card border border-border rounded-3xl p-8 shadow-sm space-y-8">
++          <div className="space-y-4">
++            <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
++              <Phone className="w-4 h-4" /> WhatsApp Number
++            </label>
++            <input
++              type="tel"
++              value={phoneNumber}
++              onChange={(e) => setPhoneNumber(e.target.value)}
++              placeholder="e.g. 1234567890"
++              className="w-full p-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium"
++            />
++          </div>
+ 
+-              <div>
+-                <label className="block text-sm font-medium mb-3 text-muted-foreground">Button Style</label>
+-                <div className="grid grid-cols-2 gap-2">
+-                  {(['default', 'rounded', 'pill', 'minimal'] as const).map((style) => (
+-                    <button
+-                      key={style}
+-                      onClick={() => setButtonStyle(style)}
+-                      className={`p-3 rounded-xl border-2 transition-all capitalize text-xs font-bold ${
+-                        buttonStyle === style
+-                          ? 'border-[var(--primary)] bg-[var(--primary)]/10 text-[var(--primary)]'
+-                          : 'border-border hover:border-muted-foreground'
+-                      }`}
+-                    >
+-                      {style}
+-                    </button>
+-                  ))}
+-                </div>
+-              </div>
++          <div className="space-y-4">
++            <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Button Text</label>
++            <input
++              type="text"
++              value={text}
++              onChange={(e) => setText(e.target.value)}
++              className="w-full p-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium"
++            />
++          </div>
+ 
+-              <div className="grid grid-cols-2 gap-4">
+-                <div>
+-                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Button Color</label>
+-                  <input
+-                    type="color"
+-                    value={buttonColor}
+-                    onChange={(e) => setButtonColor(e.target.value)}
+-                    className="w-full h-10 rounded-lg cursor-pointer bg-background p-1 border border-border"
+-                  />
+-                </div>
+-                <div>
+-                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Text Color</label>
+-                  <input
+-                    type="color"
+-                    value={textColor}
+-                    onChange={(e) => setTextColor(e.target.value)}
+-                    className="w-full h-10 rounded-lg cursor-pointer bg-background p-1 border border-border"
+-                  />
+-                </div>
+-              </div>
++          <div className="space-y-4">
++            <label className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Button Color</label>
++            <div className="flex items-center space-x-4">
++              <input
++                type="color"
++                value={color}
++                onChange={(e) => setColor(e.target.value)}
++                className="w-12 h-12 rounded-lg cursor-pointer border-0 p-0"
++              />
++              <span className="font-mono text-sm uppercase">{color}</span>
+             </div>
+-          </motion.div>
++          </div>
++        </div>
+ 
+-          {/* Preview & Code */}
+-          <div className="space-y-6 flex flex-col">
+-            <motion.div
+-              initial={{ opacity: 0, x: 20 }}
+-              animate={{ opacity: 1, x: 0 }}
+-              className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm flex-1 flex flex-col"
++        <div className="lg:sticky lg:top-8 flex flex-col space-y-8">
++          <div className="bg-card border border-border rounded-3xl p-10 flex flex-col items-center justify-center text-center">
++            <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-8">Live Preview</h3>
++            <div 
++              style={{ backgroundColor: color }}
++              className="px-8 py-4 rounded-2xl text-white font-bold flex items-center space-x-3 shadow-xl cursor-pointer hover:opacity-90 transition-opacity"
+             >
+-              <h2 className="text-xl font-bold mb-6">Live Preview</h2>
+-              <div className="flex-1 flex items-center justify-center p-8 bg-muted/30 rounded-2xl border-2 border-dashed border-border mb-6">
+-                {phone ? (
+-                  <a
+-                    href={whatsappLink}
+-                    target="_blank"
+-                    rel="noopener noreferrer"
+-                    className={`inline-flex items-center space-x-2 font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg ${buttonStyles[buttonStyle]}`}
+-                    style={{ backgroundColor: buttonColor, color: textColor }}
+-                  >
+-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="shrink-0">
+-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+-                    </svg>
+-                    <span>{buttonText}</span>
+-                  </a>
+-                ) : (
+-                  <p className="text-muted-foreground animate-pulse">Enter phone number to preview</p>
+-                )}
+-              </div>
++              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" className="w-6 h-6 invert" />
++              <span>{text}</span>
++            </div>
++          </div>
+ 
+-              <div className="bg-muted p-4 rounded-xl border border-border">
+-                <div className="flex items-center justify-between mb-3">
+-                  <h3 className="text-sm font-bold flex items-center gap-2">
+-                    <Code className="w-4 h-4" />
+-                    HTML Snippet
+-                  </h3>
+-                  <button
+-                    onClick={() => copy(generateHTML())}
+-                    disabled={!phone}
+-                    className="px-3 py-1.5 rounded-lg border border-border hover:bg-card transition-colors flex items-center gap-2 text-xs font-bold disabled:opacity-50"
+-                  >
+-                    {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+-                    <span>{copied ? 'Copied' : 'Copy Code'}</span>
+-                  </button>
+-                </div>
+-                <pre className="text-[10px] overflow-x-auto text-muted-foreground bg-background/50 p-3 rounded-lg border border-border/50">
+-                  <code>{generateHTML()}</code>
+-                </pre>
+-              </div>
+-            </motion.div>
++          <div className="bg-card border border-border rounded-3xl p-8 space-y-4">
++            <div className="flex items-center justify-between">
++              <h3 className="font-bold uppercase text-xs text-muted-foreground tracking-widest flex items-center gap-2">
++                <Code className="w-4 h-4" /> Embed Code
++              </h3>
++              <button
++                onClick={() => copy(embedCode)}
++                className="text-xs font-bold text-[var(--primary)] hover:underline cursor-pointer"
++              >
++                {copied ? 'Copied Code!' : 'Copy Code'}
++              </button>
++            </div>
++            <pre className="p-4 rounded-xl bg-muted/50 border border-border text-[10px] overflow-x-auto font-mono text-muted-foreground whitespace-pre-wrap">
++              {embedCode}
++            </pre>
+           </div>
+         </div>
+       </div>
++    </div>
+   );
+ }
+
+commit 21bbb6bb144c54b683d93744b85bd4c6b3d3cd62
+Author: lokendraitaura <lokendraitaura@example.com>
+Date:   Sun Mar 15 22:47:32 2026 +0530
+
+    feat: complete production-ready ChatPilot platform with AI architecture and full testing suite
+
+diff --git a/src/app/(dashboard)/tools/button-generator/page.tsx b/src/app/(dashboard)/tools/button-generator/page.tsx
+new file mode 100644
+index 0000000..0113ae1
+--- /dev/null
++++ b/src/app/(dashboard)/tools/button-generator/page.tsx
+@@ -0,0 +1,184 @@
++'use client';
++
++import { useState } from 'react';
++import { Copy, Check, Code, Phone, MousePointerClick } from 'lucide-react';
++import { generateWhatsAppLink } from '@/lib/whatsapp';
++import { useCopy } from '@/hooks/useCopy';
++import { motion } from 'motion/react';
++// DashboardLayout removed - handled by (dashboard)/layout.tsx
++
++export default function ButtonGeneratorPage() {
++  const [phone, setPhone] = useState('');
++  const [buttonText, setButtonText] = useState('Chat with us');
++  const [message, setMessage] = useState('');
++  const [buttonStyle, setButtonStyle] = useState<'default' | 'rounded' | 'pill' | 'minimal'>('default');
++  const [buttonColor, setButtonColor] = useState('#25D366');
++  const [textColor, setTextColor] = useState('#FFFFFF');
++  const { copied, copy } = useCopy();
++
++  const whatsappLink = phone ? generateWhatsAppLink(phone, message) : '#';
++
++  const buttonStyles = {
++    default: 'px-6 py-3 rounded-lg',
++    rounded: 'px-6 py-3 rounded-xl',
++    pill: 'px-8 py-3 rounded-full',
++    minimal: 'px-4 py-2 rounded',
++  };
++
++  const generateHTML = () => {
++    return `<!-- WhatsApp Chat Button -->
++<a href="${whatsappLink}" 
++   target="_blank" 
++   style="display: inline-flex; align-items: center; gap: 8px; background-color: ${buttonColor}; color: ${textColor}; padding: 12px 24px; border-radius: ${buttonStyle === 'pill' ? '9999px' : buttonStyle === 'rounded' ? '12px' : '8px'}; text-decoration: none; font-weight: 600; transition: opacity 0.2s;">
++  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
++    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
++  </svg>
++  ${buttonText}
++</a>`;
++  };
++
++  return (
++    <div className="space-y-8">
++        <div className="text-center space-y-4">
++          <motion.div
++            initial={{ scale: 0 }}
++            animate={{ scale: 1 }}
++            className="w-16 h-16 mx-auto rounded-2xl gradient-primary flex items-center justify-center mb-6"
++          >
++            <MousePointerClick className="w-8 h-8 text-white" />
++          </motion.div>
++          <h1 className="text-4xl font-bold">WhatsApp Button Maker</h1>
++          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
++            Design and generate professional click-to-chat buttons for your website.
++          </p>
++        </div>
++
++        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
++          {/* Configuration */}
++          <motion.div
++            initial={{ opacity: 0, x: -20 }}
++            animate={{ opacity: 1, x: 0 }}
++            className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm space-y-6"
++          >
++            <h2 className="text-xl font-bold border-b border-border pb-4">Configuration</h2>
++
++            <div className="space-y-4">
++              <div>
++                <label className="block text-sm font-medium mb-2 text-muted-foreground">Phone Number</label>
++                <div className="relative">
++                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
++                  <input
++                    type="tel"
++                    value={phone}
++                    onChange={(e) => setPhone(e.target.value)}
++                    placeholder="e.g. 919876543210"
++                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-background outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all"
++                  />
++                </div>
++              </div>
++
++              <div>
++                <label className="block text-sm font-medium mb-2 text-muted-foreground">Button Text</label>
++                <input
++                  type="text"
++                  value={buttonText}
++                  onChange={(e) => setButtonText(e.target.value)}
++                  placeholder="Chat with us"
++                  className="w-full px-4 py-3 rounded-xl border border-border bg-background outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all"
++                />
++              </div>
++
++              <div>
++                <label className="block text-sm font-medium mb-3 text-muted-foreground">Button Style</label>
++                <div className="grid grid-cols-2 gap-2">
++                  {(['default', 'rounded', 'pill', 'minimal'] as const).map((style) => (
++                    <button
++                      key={style}
++                      onClick={() => setButtonStyle(style)}
++                      className={`p-3 rounded-xl border-2 transition-all capitalize text-xs font-bold ${
++                        buttonStyle === style
++                          ? 'border-[var(--primary)] bg-[var(--primary)]/10 text-[var(--primary)]'
++                          : 'border-border hover:border-muted-foreground'
++                      }`}
++                    >
++                      {style}
++                    </button>
++                  ))}
++                </div>
++              </div>
++
++              <div className="grid grid-cols-2 gap-4">
++                <div>
++                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Button Color</label>
++                  <input
++                    type="color"
++                    value={buttonColor}
++                    onChange={(e) => setButtonColor(e.target.value)}
++                    className="w-full h-10 rounded-lg cursor-pointer bg-background p-1 border border-border"
++                  />
++                </div>
++                <div>
++                  <label className="block text-sm font-medium mb-2 text-muted-foreground">Text Color</label>
++                  <input
++                    type="color"
++                    value={textColor}
++                    onChange={(e) => setTextColor(e.target.value)}
++                    className="w-full h-10 rounded-lg cursor-pointer bg-background p-1 border border-border"
++                  />
++                </div>
++              </div>
++            </div>
++          </motion.div>
++
++          {/* Preview & Code */}
++          <div className="space-y-6 flex flex-col">
++            <motion.div
++              initial={{ opacity: 0, x: 20 }}
++              animate={{ opacity: 1, x: 0 }}
++              className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm flex-1 flex flex-col"
++            >
++              <h2 className="text-xl font-bold mb-6">Live Preview</h2>
++              <div className="flex-1 flex items-center justify-center p-8 bg-muted/30 rounded-2xl border-2 border-dashed border-border mb-6">
++                {phone ? (
++                  <a
++                    href={whatsappLink}
++                    target="_blank"
++                    rel="noopener noreferrer"
++                    className={`inline-flex items-center space-x-2 font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg ${buttonStyles[buttonStyle]}`}
++                    style={{ backgroundColor: buttonColor, color: textColor }}
++                  >
++                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" className="shrink-0">
++                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
++                    </svg>
++                    <span>{buttonText}</span>
++                  </a>
++                ) : (
++                  <p className="text-muted-foreground animate-pulse">Enter phone number to preview</p>
++                )}
++              </div>
++
++              <div className="bg-muted p-4 rounded-xl border border-border">
++                <div className="flex items-center justify-between mb-3">
++                  <h3 className="text-sm font-bold flex items-center gap-2">
++                    <Code className="w-4 h-4" />
++                    HTML Snippet
++                  </h3>
++                  <button
++                    onClick={() => copy(generateHTML())}
++                    disabled={!phone}
++                    className="px-3 py-1.5 rounded-lg border border-border hover:bg-card transition-colors flex items-center gap-2 text-xs font-bold disabled:opacity-50"
++                  >
++                    {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
++                    <span>{copied ? 'Copied' : 'Copy Code'}</span>
++                  </button>
++                </div>
++                <pre className="text-[10px] overflow-x-auto text-muted-foreground bg-background/50 p-3 rounded-lg border border-border/50">
++                  <code>{generateHTML()}</code>
++                </pre>
++              </div>
++            </motion.div>
++          </div>
++        </div>
++      </div>
++  );
++}

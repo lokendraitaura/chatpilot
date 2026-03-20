@@ -1,0 +1,7 @@
+﻿src/app/(dashboard)/tools/auto-reply/page.tsx(87,26): error TS2339: Property 'icon' does not exist on type '{ id: string; title: string; iconName: string; content: string; }'.
+src/lib/__tests__/ai-service.test.ts(12,7): error TS2353: Object literal may only specify known properties, and 'success' does not exist in type 'Promise<string>'.
+src/lib/__tests__/ai-service.test.ts(18,19): error TS2339: Property 'success' does not exist on type 'string'.
+src/lib/__tests__/ai-service.test.ts(19,19): error TS2339: Property 'data' does not exist on type 'string'.
+src/lib/__tests__/ai-service.test.ts(27,7): error TS2353: Object literal may only specify known properties, and 'success' does not exist in type 'Promise<string>'.
+src/lib/__tests__/ai-service.test.ts(33,19): error TS2339: Property 'success' does not exist on type 'string'.
+src/lib/__tests__/ai-service.test.ts(34,19): error TS2339: Property 'error' does not exist on type 'string'.
