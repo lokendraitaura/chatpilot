@@ -24,9 +24,9 @@ export function InstallAppButton() {
       whileTap={{ scale: 0.95 }}
       onClick={handleInstallClick}
       style={{ backgroundColor: 'var(--primary)' }}
-      className="flex items-center space-x-2 px-3 py-2 text-white rounded-lg shadow-md hover:shadow-lg hover:opacity-90 transition-all text-sm font-bold w-full justify-center lg:justify-start lg:w-auto"
+      className="pwa-install-btn flex items-center space-x-2 px-4 py-2 text-white rounded-lg shadow-md hover:shadow-lg hover:opacity-90 transition-all font-medium w-full justify-center lg:justify-start lg:w-auto"
     >
-      <Download className="w-4 h-4" />
+      <Download className="w-5 h-5" />
       <span className="sm:hidden">Install</span>
       <span className="hidden sm:inline">Download</span>
     </motion.button>

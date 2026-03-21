@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'sonner';
 
 import { useState } from 'react';
 import { Sparkles, Copy, Check, Smile, LayoutGrid, Info, MessageSquare, Send } from 'lucide-react';
@@ -24,10 +25,7 @@ export default function EmojiSuggesterPage() {
       const data = await response.json();
       if (data.success) {
         setResult(data.data);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
+      } else { toast.error(data.error || 'Generation failed. Please try again or wait a minute.'); } } catch (error) { console.error('Generation Error:', error); toast.error('Experiencing high network load or rate limits. Please wait a moment.'); } finally {
       setLoading(false);
     }
   };

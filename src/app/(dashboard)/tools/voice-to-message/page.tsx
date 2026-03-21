@@ -139,7 +139,7 @@ export default function VoiceToMessage() {
               value={transcript}
               onChange={(e) => setTranscript(e.target.value)}
               placeholder="Your transcribed text will appear here..."
-              className="w-full min-h-[250px] bg-muted/40 dark:bg-muted/10 rounded-2xl p-6 outline-none border border-border focus:border-[var(--primary)] transition-all text-lg leading-relaxed text-foreground dark:text-white placeholder:text-muted-foreground/50"
+              className="w-full min-h-[250px] bg-muted/40 dark:bg-zinc-900/50 rounded-2xl p-6 outline-none border border-border focus:border-[var(--primary)] transition-all text-lg leading-relaxed text-zinc-900 dark:text-zinc-100 placeholder-muted-foreground"
             />
           </motion.div>
         )}

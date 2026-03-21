@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'sonner';
 
 import { useState } from 'react';
 import { Sparkles, Copy, Check, RefreshCw, MessageCircle, LayoutGrid, Heart, Briefcase, Users, Send, Smile, Shield, Clock, User, Zap, Search, HelpCircle, Target, Coffee, Minus, FileText } from 'lucide-react';
@@ -61,10 +62,7 @@ export default function CustomerReplyPage() {
       const data = await response.json();
       if (data.success) {
         setGeneratedReply(data.data);
-      }
-    } catch (error) {
-      console.error('Reply Generation Error:', error);
-    } finally {
+      } else { toast.error(data.error || 'Generation failed. Please try again or wait a minute.'); } } catch (error) { console.error('Generation Error:', error); toast.error('Experiencing high network load or rate limits. Please wait a moment.'); } finally {
       setIsGenerating(false);
     }
   };

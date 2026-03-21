@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'sonner';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -75,10 +76,7 @@ export default function MessageImprover() {
       const data = await response.json();
       if (data.success) {
         setImprovedMessage(data.data);
-      }
-    } catch (error) {
-      console.error('Improvement Error:', error);
-    } finally {
+      } else { toast.error(data.error || 'Generation failed. Please try again or wait a minute.'); } } catch (error) { console.error('Generation Error:', error); toast.error('Experiencing high network load or rate limits. Please wait a moment.'); } finally {
       setIsGenerating(false);
     }
   };
@@ -89,9 +87,7 @@ export default function MessageImprover() {
       await navigator.clipboard.writeText(improvedMessage);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text', err);
-    }
+    } catch (err) { console.error('Generation Error:', err); toast.error('Experiencing high network load or rate limits. Please wait a moment.'); }
   };
 
   return (

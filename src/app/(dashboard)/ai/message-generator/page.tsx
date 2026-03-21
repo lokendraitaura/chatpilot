@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'sonner';
 
 import { useState } from 'react';
 import { Sparkles, Copy, Check, MessageSquare, Send, Heart, Briefcase, Users, LayoutGrid, Info, Smile, Zap, Target, Minus, HelpCircle, Shield, User, MessageCircle } from 'lucide-react';
@@ -61,10 +62,7 @@ export default function MessageGeneratorPage() {
       const data = await response.json();
       if (data.success) {
         setGeneratedMessage(data.data);
-      }
-    } catch (error) {
-      console.error('Generation Error:', error);
-    } finally {
+      } else { toast.error(data.error || 'Generation failed. Please try again or wait a minute.'); } } catch (error) { console.error('Generation Error:', error); toast.error('Experiencing high network load or rate limits. Please wait a moment.'); } finally {
       setIsGenerating(false);
     }
   };

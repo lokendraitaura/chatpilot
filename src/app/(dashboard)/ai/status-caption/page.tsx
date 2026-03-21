@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'sonner';
 
 import { useState } from 'react';
 import { Sparkles, Copy, Check, Image as ImageIcon, RefreshCw, LayoutGrid, Info, Heart, Briefcase, Zap, Smile, Send, Minus, Laugh, Skull, User, Globe, Clock, BookOpen } from 'lucide-react';
@@ -37,16 +38,13 @@ export default function StatusCaptionPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          prompt: `${topic}. Tone: ${tone}` 
+          topic: `${topic}. Tone: ${tone}` 
         }),
       });
       const data = await response.json();
       if (data.success) {
         setGeneratedCaption(data.data);
-      }
-    } catch (error) {
-      console.error('Caption Generation Error:', error);
-    } finally {
+      } else { toast.error(data.error || 'Generation failed. Please try again or wait a minute.'); } } catch (error) { console.error('Generation Error:', error); toast.error('Experiencing high network load or rate limits. Please wait a moment.'); } finally {
       setIsGenerating(false);
     }
   };

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer primary ring -->
+  <circle cx="45" cy="50" r="42" fill="#25D366" />
+  
+  <!-- Inner white chat bubble -->
+  <path d="M45 15C63 15 78 28 78 45C78 62 63 75 45 75C39 75 33.5 73.2 29 70L15 75L20 62C16.8 57.5 15 51.5 15 45C15 28 28.5 15 45 15Z" fill="#FFFFFF" />
+        
+  <!-- Top right secondary pointer -->
+  <path d="M55 35L85 15L70 45L55 35Z" fill="#128C7E" />
+  <path d="M55 35L85 15L65 25L55 35Z" fill="#128C7E" opacity="0.7" />
+</svg>

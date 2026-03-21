@@ -40,6 +40,7 @@ export const viewport = {
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { PWAProvider } from '@/components/pwa/PWAProvider';
+import { Toaster } from 'sonner';
 
 export default function RootLayout({
   children,
@@ -85,6 +86,7 @@ export default function RootLayout({
             }}
           />
           {children}
+          <Toaster position="bottom-right" theme="system" richColors />
           <GoogleAnalytics gaId="G-YOUR-MEARSUREMENT-ID" />
         </ThemeProvider>
         </PWAProvider>
