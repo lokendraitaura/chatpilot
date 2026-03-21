@@ -41,6 +41,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { PWAProvider } from '@/components/pwa/PWAProvider';
 import { Toaster } from 'sonner';
+import { SplashScreen } from '@/components/ui/SplashScreen';
 
 export default function RootLayout({
   children,
@@ -50,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        <SplashScreen />
         <PWAProvider>
           <ThemeProvider>
           <script
