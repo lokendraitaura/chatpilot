@@ -51,9 +51,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <SplashScreen />
         <PWAProvider>
           <ThemeProvider>
+            <SplashScreen />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{

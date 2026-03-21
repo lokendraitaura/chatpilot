@@ -98,10 +98,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  if (!mounted) {
-    return null;
-  }
-
   return (
     <ThemeContext.Provider value={{ theme, isDark, setTheme, setCustomTheme, toggleDarkMode }}>
       <div className={isDark ? 'dark' : ''}>
