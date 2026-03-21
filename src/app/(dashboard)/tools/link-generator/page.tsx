@@ -51,7 +51,7 @@ export default function LinkGeneratorPage() {
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="flex items-center gap-2 px-4 py-4 rounded-xl border-2 border-border focus:border-[var(--primary)] bg-background outline-none transition-all font-medium whitespace-nowrap cursor-pointer hover:border-[var(--primary)]/50"
                 >
-                  <span className="text-xl">{selectedCountry.flag}</span>
+                  <span className="text-xl"><img src={`https://flagcdn.com/w20/${selectedCountry.iso}.png`} alt={selectedCountry.name} className="w-5 h-auto inline-block rounded-sm" /></span>
                   <span className="text-sm font-bold">{selectedCountry.code}</span>
                   <ChevronDown className="w-4 h-4 text-muted-foreground" />
                 </button>
@@ -77,7 +77,7 @@ export default function LinkGeneratorPage() {
                               : ''
                           }`}
                         >
-                          <span className="text-lg">{country.flag}</span>
+                          <span className="text-lg"><img src={`https://flagcdn.com/w20/${country.iso}.png`} alt={country.name} className="w-5 h-auto inline-block rounded-sm" /></span>
                           <span className="flex-1">{country.name}</span>
                           <span className="font-mono text-muted-foreground">{country.code}</span>
                         </button>

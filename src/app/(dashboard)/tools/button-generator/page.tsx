@@ -110,7 +110,7 @@ export default function ButtonGeneratorPage() {
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="flex items-center gap-2 px-4 py-4 rounded-xl border-2 border-border hover:border-[var(--primary)]/50 bg-background outline-none transition-all font-medium whitespace-nowrap cursor-pointer"
                 >
-                  <span className="text-xl">{selectedCountry.flag}</span>
+                  <span className="text-xl"><img src={`https://flagcdn.com/w20/${selectedCountry.iso}.png`} alt={selectedCountry.name} className="w-5 h-auto inline-block rounded-sm" /></span>
                   <span className="text-sm font-bold">{selectedCountry.code}</span>
                   <ChevronDown className="w-4 h-4 text-muted-foreground" />
                 </button>
@@ -131,7 +131,7 @@ export default function ButtonGeneratorPage() {
                             selectedCountry.name === country.name ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-bold' : ''
                           }`}
                         >
-                          <span className="text-lg">{country.flag}</span>
+                          <span className="text-lg"><img src={`https://flagcdn.com/w20/${country.iso}.png`} alt={country.name} className="w-5 h-auto inline-block rounded-sm" /></span>
                           <span className="flex-1">{country.name}</span>
                           <span className="font-mono text-muted-foreground">{country.code}</span>
                         </button>

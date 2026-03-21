@@ -5,6 +5,7 @@ import { BookOpen, ArrowRight, Clock, User } from 'lucide-react';
 import * as Icons from 'lucide-react';
 // DashboardLayout removed - handled by (dashboard)/layout.tsx
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { BLOG_POSTS } from '@/lib/blog-data';
 
@@ -37,10 +38,12 @@ export default function BlogPage() {
               <div 
                 className="h-48 relative overflow-hidden bg-muted group-hover:opacity-90 transition-opacity"
               >
-                 <img 
+                 <Image 
                    src={post.image} 
                    alt={`${post.title} thumbnail`}
-                   className="w-full h-full object-cover object-top"
+                   fill
+                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   className="object-cover object-top"
                  />
                  <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />
                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold bg-white/90 text-black backdrop-blur-md px-4 py-2 rounded-xl opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-xl border border-white/50 z-10">

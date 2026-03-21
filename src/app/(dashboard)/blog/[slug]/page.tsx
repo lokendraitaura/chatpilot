@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Tag } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -55,11 +56,13 @@ export default function BlogPostPage() {
           </div>
         </div>
 
-        <div className="w-full rounded-[2rem] overflow-hidden shadow-2xl border border-border mt-8 bg-muted">
-          <img 
+        <div className="w-full relative h-[300px] sm:h-[400px] md:h-[600px] rounded-[2rem] overflow-hidden shadow-2xl border border-border mt-8 bg-muted">
+          <Image 
             src={post.image} 
             alt={`${post.title} interface`}
-            className="w-full h-auto object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
           />
         </div>
 

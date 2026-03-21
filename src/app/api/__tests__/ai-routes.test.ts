@@ -15,16 +15,16 @@ jest.mock('next/server', () => {
     NextRequest: class {
       url: string;
       body: string;
-      constructor(url: string, init: any) {
+      constructor(url: string, init: RequestInit) {
         this.url = url;
-        this.body = init.body;
+        this.body = (init.body as string) || '';
       }
       async json() {
         return JSON.parse(this.body);
       }
     },
     NextResponse: {
-      json: (body: any, init?: any) => ({
+      json: (body: unknown, init?: ResponseInit) => ({
         json: async () => body,
         status: init?.status || 200,
       }),
@@ -44,7 +44,7 @@ describe('AI API Routes Integration', () => {
         body: JSON.stringify({}),
       });
 
-      const response: any = await POST(req);
+      const response: Response = await POST(req);
       const data = await response.json();
 
       expect(response.status).toBe(400);
@@ -60,7 +60,7 @@ describe('AI API Routes Integration', () => {
         body: JSON.stringify({ prompt: 'test prompt' }),
       });
 
-      const response: any = await POST(req);
+      const response: Response = await POST(req);
       const data = await response.json();
 
       expect(response.status).toBe(200);
@@ -77,7 +77,7 @@ describe('AI API Routes Integration', () => {
         body: JSON.stringify({ prompt: 'test prompt' }),
       });
 
-      const response: any = await POST(req);
+      const response: Response = await POST(req);
       const data = await response.json();
 
       expect(response.status).toBe(500);

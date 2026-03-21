@@ -7,6 +7,7 @@ import { useTheme } from '@/components/providers/ThemeProvider';
 import { THEMES } from '@/lib/constants';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '@/components/ui/Logo';
+import { InstallAppButton } from '@/components/pwa/InstallAppButton';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -131,9 +132,11 @@ export function Navbar() {
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
+            <InstallAppButton />
+
             <Link
               href="/tools/link-generator"
-              className="px-4 py-2 rounded-lg text-white font-medium gradient-primary hover:opacity-90 transition-opacity cursor-pointer"
+              className="px-4 py-2 rounded-lg text-white font-medium gradient-primary hover:opacity-90 transition-opacity cursor-pointer flex-shrink-0"
             >
               Get Started
             </Link>
@@ -216,6 +219,8 @@ export function Navbar() {
                   ))}
                 </div>
               </div>
+              
+              <InstallAppButton />
               
               <Link
                 href="/tools/link-generator"

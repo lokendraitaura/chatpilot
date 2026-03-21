@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { Logo } from '@/components/ui/Logo';
+import { InstallAppButton } from '@/components/pwa/InstallAppButton';
 
 const TOOLS = [
   { name: 'Link Generator', href: '/tools/link-generator', icon: LinkIcon, group: 'Core Tools' },
@@ -89,7 +90,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         className={`fixed top-0 left-0 z-50 h-screen w-64 bg-card border-r border-border overflow-y-auto transition-transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
           }`}
       >
-        <div className="p-6 border-b border-border hidden lg:block">
+        <div className="p-6 border-b border-border flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3 group">
             <Logo className="w-10 h-10 group-hover:scale-110 transition-transform" />
             <div className="flex flex-col">
@@ -97,6 +98,12 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <span className="text-[10px] font-bold text-muted-foreground uppercase -mt-1">Premium Dashboard</span>
             </div>
           </Link>
+          <button 
+            onClick={() => setSidebarOpen(false)}
+            className="p-2 rounded-lg hover:bg-muted lg:hidden text-muted-foreground"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
         <div className="p-4 space-y-6">
@@ -178,15 +185,18 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2 text-xs font-medium text-muted-foreground/60">
-            <span>Tools</span>
-            <span>/</span>
-            <span className="text-foreground capitalize">{pathname.split('/').pop()?.replace(/-/g, ' ')}</span>
+          <div className="flex items-center space-x-4">
+            <InstallAppButton />
+            <div className="hidden sm:flex items-center space-x-2 text-xs font-medium text-muted-foreground/60">
+              <span>Tools</span>
+              <span>/</span>
+              <span className="text-foreground capitalize">{pathname.split('/').pop()?.replace(/-/g, ' ')}</span>
+            </div>
           </div>
         </header>
 
-        {/* pt-32 = Large breathing room so icons and titles are never cramped under the fixed header */}
-        <main className=" flex-1 flex flex-col pt-32 pb-12 p-4 md:p-8 lg:p-12 mt-5 overflow-x-hidden">
+        {/* pt-20 = reduced top padding on mobile, more on desktop */}
+        <main className=" flex-1 flex flex-col pt-20 lg:pt-24 pb-20 lg:pb-12 px-3 sm:px-6 md:px-8 mt-2 overflow-x-hidden">
           <div className="w-full max-w-5xl mx-auto flex-1 h-full">
             {children}
           </div>

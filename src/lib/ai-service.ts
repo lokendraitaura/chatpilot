@@ -1,11 +1,12 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 import { GroqProvider } from "./ai/providers/groq";
 import { AIProvider, GenerationOptions } from "./ai/types";
+import { Llama3FallbackProvider } from "./ai/providers/llama-fallback";
 
 // Registry of available providers
 const providers: Record<string, AIProvider> = {
   groq: new GroqProvider(),
-  // openRouter: new OpenRouterProvider(), // Future
+  llamaFallback: new Llama3FallbackProvider(),
 };
 
 // Current active provider (can be moved to env)
@@ -61,8 +62,26 @@ export const aiService = {
     if (!template) {
       throw new Error(`Template '${templateName}' not found`);
     }
+    try {
+      const timeoutPromise = new Promise<string>((_, reject) => {
+        setTimeout(() => reject(new Error('Provider timeout exceeded')), 3000);
+      });
 
-    // Call active provider
-    return activeProvider.generate(template as any, options);
+      const result = await Promise.race([
+        activeProvider.generate(template as any, options),
+        timeoutPromise
+      ]);
+
+      return result;
+    } catch (error) {
+      console.warn(`Primary provider failed or timed out: ${error instanceof Error ? error.message : String(error)}. Switching to Fallback Provider.`);
+      
+      try {
+         return await providers.llamaFallback.generate(template as any, options);
+      } catch (fallbackError) {
+         console.error('Fallback provider also failed:', fallbackError);
+         throw new Error('All AI providers are currently experiencing issues. Please try again later.');
+      }
+    }
   }
 };
