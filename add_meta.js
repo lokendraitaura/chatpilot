@@ -17,6 +17,7 @@ function capitalize(s) {
   return s.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
+
 walk('c:/Users/su_06/Downloads/ChatPilot Updated/src/app/(dashboard)', (filepath) => {
   if (path.basename(filepath) === 'page.tsx') {
     let content = fs.readFileSync(filepath, 'utf8');
