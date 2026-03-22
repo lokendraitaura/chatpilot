@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'WhatsApp Link Generator | ChatPilot',
+  title: 'WhatsApp Link Generator | GoChatPilot',
   description: 'Create custom WhatsApp links with pre-filled messages instantly. Simple, fast, and free.',
 };
 

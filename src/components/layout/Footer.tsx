@@ -13,7 +13,7 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Logo className="w-8 h-8" />
-              <span className="font-bold text-xl">ChatPilot</span>
+              <span className="font-bold text-xl">GoChatPilot</span>
             </div>
             <p className="text-sm text-muted-foreground max-w-md">
               Your all-in-one WhatsApp toolkit powered by AI. Generate links, QR codes, messages, and more - all from one powerful dashboard.
@@ -77,7 +77,7 @@ export function Footer() {
 
         <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ChatPilot. All rights reserved. Made with ❤️ for WhatsApp power users.
+            © {new Date().getFullYear()} GoChatPilot. All rights reserved. Made with ❤️ for WhatsApp power users.
           </p>
         </div>
       </div>

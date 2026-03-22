@@ -8,7 +8,7 @@ const testimonials = [
     name: 'Sarah Johnson',
     role: 'Marketing Manager',
     company: 'TechCorp',
-    content: 'ChatPilot has revolutionized how we handle WhatsApp marketing. The AI message generator alone saves us hours every week!',
+    content: 'GoChatPilot has revolutionized how we handle WhatsApp marketing. The AI message generator alone saves us hours every week!',
     rating: 5,
   },
   {
@@ -47,7 +47,7 @@ export function Testimonials() {
             transition={{ delay: 0.1 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            See what our users have to say about ChatPilot
+            See what our users have to say about GoChatPilot
           </motion.p>
         </div>
 

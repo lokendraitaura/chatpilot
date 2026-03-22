@@ -94,7 +94,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <Link href="/" className="flex items-center space-x-3 group">
             <Logo className="w-10 h-10 group-hover:scale-110 transition-transform" />
             <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight">ChatPilot</span>
+              <span className="text-xl font-bold tracking-tight">GoChatPilot</span>
               <span className="text-[10px] font-bold text-muted-foreground uppercase -mt-1">Premium Dashboard</span>
             </div>
           </Link>

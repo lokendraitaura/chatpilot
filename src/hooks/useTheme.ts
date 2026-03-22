@@ -15,8 +15,8 @@ export function useTheme() {
 
   useEffect(() => {
     // Load saved theme from localStorage
-    const savedTheme = localStorage.getItem('chatpilot-theme');
-    const savedMode = localStorage.getItem('chatpilot-mode');
+    const savedTheme = localStorage.getItem('gochatpilot-theme');
+    const savedMode = localStorage.getItem('gochatpilot-mode');
     
     if (savedTheme) {
       setTheme(JSON.parse(savedTheme));
@@ -30,7 +30,7 @@ export function useTheme() {
 
   const updateTheme = (newTheme: Theme) => {
     setTheme(newTheme);
-    localStorage.setItem('chatpilot-theme', JSON.stringify(newTheme));
+    localStorage.setItem('gochatpilot-theme', JSON.stringify(newTheme));
     
     // Apply CSS variables
     document.documentElement.style.setProperty('--primary', newTheme.primary);
@@ -40,7 +40,7 @@ export function useTheme() {
   const toggleDarkMode = () => {
     const newMode = !isDark;
     setIsDark(newMode);
-    localStorage.setItem('chatpilot-mode', newMode ? 'dark' : 'light');
+    localStorage.setItem('gochatpilot-mode', newMode ? 'dark' : 'light');
     
     if (newMode) {
       document.documentElement.classList.add('dark');

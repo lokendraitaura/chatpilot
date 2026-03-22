@@ -30,7 +30,7 @@ export function Navbar() {
           <Link prefetch href="/" className="flex items-center space-x-2 cursor-pointer">
             <Logo className="w-10 h-10" />
             <span className="font-bold text-2xl tracking-tight">
-              <span style={{ color: theme.primary }}>Chat</span>
+              <span style={{ color: theme.primary }}>GoChat</span>
               <span style={{ color: theme.secondary }}>Pilot</span>
             </span>
           </Link>

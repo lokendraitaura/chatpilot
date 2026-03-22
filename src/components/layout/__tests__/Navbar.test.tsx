@@ -30,7 +30,7 @@ const renderWithTheme = (ui: React.ReactElement) => {
 describe('Navbar Component', () => {
   it('renders the logo and brand name', () => {
     renderWithTheme(<Navbar />);
-    expect(screen.getByText('Chat')).toBeInTheDocument();
+    expect(screen.getByText('GoChat')).toBeInTheDocument();
     expect(screen.getByText('Pilot')).toBeInTheDocument();
   });
 

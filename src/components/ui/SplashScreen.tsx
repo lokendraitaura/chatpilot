@@ -57,7 +57,7 @@ export function SplashScreen() {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="flex flex-col items-center space-y-4"
             >
-              <h1 className="text-4xl font-bold tracking-tight">ChatPilot</h1>
+              <h1 className="text-4xl font-bold tracking-tight">GoChatPilot</h1>
               <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden relative">
                 <motion.div 
                   initial={{ x: '-100%' }}

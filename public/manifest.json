@@ -1,23 +1,26 @@
 {
-  "name": "ChatPilot",
-  "short_name": "ChatPilot",
+  "name": "GoChatPilot",
+  "short_name": "GoChatPilot",
   "description": "The ultimate AI-Powered WhatsApp Toolkit for Marketing and Productivity.",
   "start_url": "/",
   "id": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#25D366",
   "theme_color": "#25D366",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/logo.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml"
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
   "categories": ["business", "productivity", "utilities"]

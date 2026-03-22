@@ -24,8 +24,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setMounted(true);
     
     // Load saved preferences
-    const savedTheme = localStorage.getItem('chatpilot-theme');
-    const savedMode = localStorage.getItem('chatpilot-mode');
+    const savedTheme = localStorage.getItem('gochatpilot-theme');
+    const savedMode = localStorage.getItem('gochatpilot-mode');
     
     if (savedTheme) {
       const parsedTheme = JSON.parse(savedTheme);
@@ -72,7 +72,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem('chatpilot-theme', JSON.stringify(newTheme));
+    localStorage.setItem('gochatpilot-theme', JSON.stringify(newTheme));
     applyTheme(newTheme);
   };
 
@@ -89,7 +89,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggleDarkMode = () => {
     const newMode = !isDark;
     setIsDark(newMode);
-    localStorage.setItem('chatpilot-mode', newMode ? 'dark' : 'light');
+    localStorage.setItem('gochatpilot-mode', newMode ? 'dark' : 'light');
     
     if (newMode) {
       document.documentElement.classList.add('dark');
