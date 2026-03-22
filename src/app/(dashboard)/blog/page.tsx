@@ -20,7 +20,7 @@ export default function BlogPage() {
           >
             <BookOpen className="w-8 h-8 text-white" />
           </motion.div>
-          <h1 className="text-5xl font-bold">ChatPilot Blog</h1>
+          <h1 className="text-5xl font-bold">GoChatPilot Blog</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Insights, guides, and strategies to help you master WhatsApp marketing and grow your business.
           </p>
@@ -65,7 +65,7 @@ export default function BlogPage() {
                 <div className="pt-6 mt-auto border-t border-border flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <User className="w-3 h-3" />
-                    <span>ChatPilot Team</span>
+                    <span>GoChatPilot Team</span>
                   </div>
                   <Link 
                     href={`/blog/${post.id}`}

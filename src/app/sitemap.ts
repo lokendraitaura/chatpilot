@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://chatpilot.in'; // Replace with actual domain if known
+  const baseUrl = 'https://chat-pilot.in'; // Replace with actual domain if known
 
   const routes = [
     '',

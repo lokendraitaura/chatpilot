@@ -25,7 +25,7 @@ walk('c:/Users/su_06/Downloads/ChatPilot Updated/src/app/(dashboard)', (filepath
       if (folderName && folderName !== '(dashboard)' && folderName !== 'tools' && folderName !== 'ai') {
          const titleName = capitalize(folderName);
          
-         const meta = `export const metadata = {\n  title: '${titleName} | ChatPilot',\n  description: 'Use the ${titleName} tool to supercharge your WhatsApp marketing on ChatPilot.',\n  alternates: { canonical: 'https://chatpilot.in/tools/${folderName}' }\n};\n\n`;
+         const meta = `export const metadata = {\n  title: '${titleName} | GoChatPilot',\n  description: 'Use the ${titleName} tool to supercharge your WhatsApp marketing on GoChatPilot.',\n  alternates: { canonical: 'https://chat-pilot.in/tools/${folderName}' }\n};\n\n`;
          
          // Insert after imports
          const lines = content.split('\n');

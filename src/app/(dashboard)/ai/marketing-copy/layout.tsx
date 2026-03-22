@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI WhatsApp Marketing Copy Generator | ChatPilot',
+  title: 'AI WhatsApp Marketing Copy Generator | GoChatPilot',
   description: 'Generate powerful marketing copy for your WhatsApp campaigns instantly with AI.',
 };
 

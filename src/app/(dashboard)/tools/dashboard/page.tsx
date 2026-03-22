@@ -67,7 +67,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-12">
         <header>
-          <h1 className="text-3xl font-bold mb-2">Welcome to ChatPilot</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome to GoChatPilot</h1>
           <p className="text-muted-foreground">Select a tool from your library to get started.</p>
         </header>
 

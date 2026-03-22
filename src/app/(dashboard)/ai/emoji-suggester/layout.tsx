@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI Emoji Suggester | ChatPilot',
+  title: 'AI Emoji Suggester | GoChatPilot',
   description: 'Get perfect emoji suggestions for your WhatsApp messages to increase engagement.',
 };
 

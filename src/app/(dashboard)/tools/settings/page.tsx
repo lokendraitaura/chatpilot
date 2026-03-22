@@ -57,7 +57,7 @@ export default function SettingsPage() {
             <span className="font-bold uppercase tracking-widest text-xs">System settings</span>
           </div>
           <h1 className="text-4xl font-black tracking-tight">Configuration</h1>
-          <p className="text-muted-foreground text-lg">Personalize your ChatPilot experience and manage application preferences.</p>
+          <p className="text-muted-foreground text-lg">Personalize your GoChatPilot experience and manage application preferences.</p>
         </header>
 
         {/* Tabs */}
@@ -224,7 +224,7 @@ export default function SettingsPage() {
                         <Smartphone className="w-5 h-5 text-[var(--primary)]" />
                         App Experience
                       </h2>
-                      <p className="text-sm text-muted-foreground">Adjust how ChatPilot behaves on your device.</p>
+                      <p className="text-sm text-muted-foreground">Adjust how GoChatPilot behaves on your device.</p>
                     </div>
 
                     <div className="space-y-4">

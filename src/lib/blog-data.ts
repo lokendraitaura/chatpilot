@@ -22,13 +22,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 24, 2023',
     readTime: '3 min read',
@@ -46,13 +46,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 25, 2023',
     readTime: '4 min read',
@@ -70,13 +70,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 26, 2023',
     readTime: '4 min read',
@@ -94,13 +94,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 27, 2023',
     readTime: '2 min read',
@@ -118,13 +118,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 02, 2023',
     readTime: '2 min read',
@@ -142,13 +142,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 03, 2023',
     readTime: '2 min read',
@@ -168,13 +168,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 04, 2023',
     readTime: '5 min read',
@@ -192,13 +192,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 05, 2023',
     readTime: '3 min read',
@@ -216,13 +216,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 06, 2023',
     readTime: '4 min read',
@@ -240,13 +240,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 07, 2023',
     readTime: '3 min read',
@@ -264,13 +264,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 08, 2023',
     readTime: '4 min read',
@@ -290,13 +290,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 01, 2023',
     readTime: '3 min read',
@@ -314,13 +314,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 28, 2023',
     readTime: '3 min read',
@@ -338,13 +338,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 09, 2023',
     readTime: '4 min read',
@@ -362,13 +362,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 10, 2023',
     readTime: '2 min read',
@@ -386,13 +386,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 11, 2023',
     readTime: '4 min read',
@@ -410,13 +410,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 29, 2023',
     readTime: '3 min read',
@@ -434,13 +434,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Nov 12, 2023',
     readTime: '2 min read',
@@ -458,13 +458,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 30, 2023',
     readTime: '4 min read',
@@ -482,13 +482,13 @@ export const BLOG_POSTS: BlogPost[] = [
 <h3>Video Tutorial Breakdown</h3>
 <p>In the video tutorial above, we walk you through a step-by-step English explanation of how to use this tool:</p>
 <ol>
-  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your ChatPilot dashboard menu.</li>
+  <li><strong>Select the Tool:</strong> Navigate to this specific tool from your GoChatPilot dashboard menu.</li>
   <li><strong>Input Your Details:</strong> Fill in the required fields like your phone number, message, or prompt. The tool will give you instant validation so you know if your input is correct.</li>
   <li><strong>Customize & Choose Tone/Style:</strong> Use the intuitive buttons and selectors to pick your preferred style, tone, or country code.</li>
   <li><strong>Generate:</strong> Click the primary "Generate" button. Our system (or AI) processes this instantly and displays the result on the right side of your screen.</li>
   <li><strong>Copy & Use:</strong> Review the result, and click the "Copy" button. You can now paste this directly into WhatsApp or your marketing campaigns!</li>
 </ol>
-<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize ChatPilot's capabilities.</p>
+<p>By following these simple steps shown in the video, you can maximize your productivity and fully utilize GoChatPilot's capabilities.</p>
 `,
     date: 'Oct 31, 2023',
     readTime: '2 min read',

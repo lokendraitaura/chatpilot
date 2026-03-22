@@ -31,27 +31,42 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
         });
     }
 
+    const checkCapturedPrompt = () => {
+      if ((window as any).deferredPWAPrompt) {
+        console.log('📦 Using captured PWA prompt');
+        setDeferredPrompt((window as any).deferredPWAPrompt);
+        setIsInstallable(true);
+      }
+    };
+
     // Capture the install prompt
     const handleBeforeInstallPrompt = (e: any) => {
-      // Prevent the mini-infobar from appearing on mobile
+      console.log('✅ beforeinstallprompt event fired');
       e.preventDefault();
-      // Stash the event so it can be triggered later.
       setDeferredPrompt(e);
       setIsInstallable(true);
+      (window as any).deferredPWAPrompt = e;
     };
 
     const handleAppInstalled = () => {
       setIsInstallable(false);
       setDeferredPrompt(null);
-      console.log('PWA was installed');
+      (window as any).deferredPWAPrompt = null;
+      console.log('🎉 PWA was installed successfully');
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     window.addEventListener('appinstalled', handleAppInstalled);
+    window.addEventListener('pwa-ready', checkCapturedPrompt);
+
+    checkCapturedPrompt();
+
+    console.log('📡 PWA Listeners initialized');
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
+      window.removeEventListener('pwa-ready', checkCapturedPrompt);
     };
   }, []);
 
