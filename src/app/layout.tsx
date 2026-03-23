@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Free WhatsApp tools like link generator, QR code generator, AI message writer, and bulk messaging tools. Boost your WhatsApp marketing with GoChatPilot.",
   keywords: [
+    "GoChatPilot",
     "WhatsApp link generator",
     "WhatsApp QR code generator",
     "AI message generator",
@@ -19,9 +20,22 @@ export const metadata: Metadata = {
     "QR code generator free",
     "bulk WhatsApp message tool",
     "WhatsApp button generator",
-    "GoChatPilot tools"
+    "WhatsApp tools free",
+    "AI WhatsApp writer",
+    "WhatsApp business tools",
+    "click to chat WhatsApp",
+    "WhatsApp chatbot tools",
+    "WhatsApp auto reply",
+    "WhatsApp status caption generator",
+    "WhatsApp message templates",
+    "GoChatPilot tools",
+    "WhatsApp marketing automation",
+    "WhatsApp catalog maker",
+    "free QR code WhatsApp"
   ],
   metadataBase: new URL("https://chat-pilot.in"),
+  authors: [{ name: "GoChatPilot Team", url: "https://chat-pilot.in" }],
+  category: "Technology",
   openGraph: {
     title: "GoChatPilot - Free WhatsApp Tools & AI Message Generator",
     description:
@@ -30,10 +44,10 @@ export const metadata: Metadata = {
     siteName: "GoChatPilot",
     images: [
       {
-        url: "/logo.svg",
-        width: 1200,
-        height: 630,
-        alt: "GoChatPilot WhatsApp Tools",
+        url: "/icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "GoChatPilot - WhatsApp Tools & AI Message Generator",
       },
     ],
     locale: "en_US",
@@ -41,14 +55,20 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GoChatPilot - WhatsApp Tools & AI Generator",
+    title: "GoChatPilot - WhatsApp Tools & AI Message Generator",
     description:
       "Create WhatsApp links, QR codes, and AI messages easily with GoChatPilot.",
-    images: ["/logo.svg"],
+    images: ["/icon-512.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   alternates: {
     canonical: "https://chat-pilot.in",
@@ -60,8 +80,9 @@ export const metadata: Metadata = {
     title: "GoChatPilot",
   },
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
   formatDetection: {
     telephone: false,
@@ -119,7 +140,7 @@ export default function RootLayout({
                   "description": "AI-Powered WhatsApp Toolkit for Marketing and Productivity by GoChatPilot",
                   "potentialAction": {
                     "@type": "SearchAction",
-                    "target": "https://chat-pilot.in/search?q={search_term_string}",
+                    "target": "https://chat-pilot.in/?q={search_term_string}",
                     "query-input": "required name=search_term_string"
                   }
                 },
@@ -127,10 +148,16 @@ export default function RootLayout({
                   "@context": "https://schema.org",
                   "@type": "SoftwareApplication",
                   "name": "GoChatPilot",
-                  "operatingSystem": "All",
-                  "applicationCategory": "BusinessApplication",
+                  "operatingSystem": "Web, Android, iOS",
+                  "applicationCategory": "ProductivityApplication",
+                  "featureList": "WhatsApp Tools, QR Code Generator, AI Message Generator, WhatsApp Link Shortener, Button Generator, Catalog Maker",
                   "description": "AI-powered WhatsApp toolkit by GoChatPilot bringing automation, message generators, and marketing copy tools into one dashboard.",
                   "url": "https://chat-pilot.in",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "GoChatPilot",
+                    "url": "https://chat-pilot.in"
+                  },
                   "offers": {
                     "@type": "Offer",
                     "price": "0",
