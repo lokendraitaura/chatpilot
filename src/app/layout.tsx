@@ -72,6 +72,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://chat-pilot.in",
+    languages: {
+      'en-US': 'https://chat-pilot.in',
+    },
   },
   manifest: "/manifest.json?v=2",
   appleWebApp: {
@@ -80,8 +83,11 @@ export const metadata: Metadata = {
     title: "GoChatPilot",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/icon-192.png",
     apple: "/apple-icon.png",
   },
   formatDetection: {
@@ -110,6 +116,30 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Explicit Site Name for Google */}
+        <meta property="og:site_name" content="GoChatPilot" />
+        <meta name="application-name" content="GoChatPilot" />
+        <meta name="apple-mobile-web-app-title" content="GoChatPilot" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "GoChatPilot",
+              "alternateName": ["Go Chat Pilot", "ChatPilot"],
+              "url": "https://chat-pilot.in",
+              "description": "AI-Powered WhatsApp Toolkit for Marketing and Productivity",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://chat-pilot.in/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }),
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <PWAProvider>
           <ThemeProvider>
@@ -131,40 +161,26 @@ export default function RootLayout({
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify([
-                {
-                  "@context": "https://schema.org",
-                  "@type": "WebSite",
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": "GoChatPilot",
+                "operatingSystem": "Web, Android, iOS",
+                "applicationCategory": "ProductivityApplication",
+                "featureList": "WhatsApp Tools, QR Code Generator, AI Message Generator, WhatsApp Link Shortener, Button Generator, Catalog Maker",
+                "description": "AI-powered WhatsApp toolkit by GoChatPilot bringing automation, message generators, and marketing copy tools into one dashboard.",
+                "url": "https://chat-pilot.in",
+                "author": {
+                  "@type": "Organization",
                   "name": "GoChatPilot",
-                  "url": "https://chat-pilot.in",
-                  "description": "AI-Powered WhatsApp Toolkit for Marketing and Productivity by GoChatPilot",
-                  "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://chat-pilot.in/?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                  }
+                  "url": "https://chat-pilot.in"
                 },
-                {
-                  "@context": "https://schema.org",
-                  "@type": "SoftwareApplication",
-                  "name": "GoChatPilot",
-                  "operatingSystem": "Web, Android, iOS",
-                  "applicationCategory": "ProductivityApplication",
-                  "featureList": "WhatsApp Tools, QR Code Generator, AI Message Generator, WhatsApp Link Shortener, Button Generator, Catalog Maker",
-                  "description": "AI-powered WhatsApp toolkit by GoChatPilot bringing automation, message generators, and marketing copy tools into one dashboard.",
-                  "url": "https://chat-pilot.in",
-                  "author": {
-                    "@type": "Organization",
-                    "name": "GoChatPilot",
-                    "url": "https://chat-pilot.in"
-                  },
-                  "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                  }
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
                 }
-              ]),
+              }),
             }}
           />
           {children}

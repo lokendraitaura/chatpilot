@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Linkedin } from 'lucide-react';
+import { Mail, Linkedin, Youtube, Instagram } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 
 export function Footer() {
@@ -15,9 +15,36 @@ export function Footer() {
               <Logo className="w-8 h-8" />
               <span className="font-bold text-xl">GoChatPilot</span>
             </div>
-            <p className="text-sm text-muted-foreground max-w-md">
+            <p className="text-sm text-muted-foreground max-w-md mb-6">
               Your all-in-one WhatsApp toolkit powered by AI. Generate links, QR codes, messages, and more - all from one powerful dashboard.
             </p>
+            <div className="flex items-center space-x-4">
+              <a 
+                href="https://www.youtube.com/@gochatpilot" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors text-muted-foreground hover:text-[#FF0000]"
+                title="Follow on YouTube"
+              >
+                <Youtube className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://www.instagram.com/gochatpilot_software" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors text-muted-foreground hover:text-[#E4405F]"
+                title="Follow on Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="mailto:gochatpilot@gmail.com" 
+                className="p-2 rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors text-muted-foreground hover:text-[var(--primary)]"
+                title="Email Us"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
           {/* Tools */}
