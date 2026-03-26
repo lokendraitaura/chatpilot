@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Free WhatsApp tools like link generator, QR code generator, AI message writer, and bulk messaging tools. Boost your WhatsApp marketing with GoChatPilot.",
   keywords: [
+    "GoChatPilot",
     "WhatsApp link generator",
     "WhatsApp QR code generator",
     "AI message generator",
@@ -19,9 +20,22 @@ export const metadata: Metadata = {
     "QR code generator free",
     "bulk WhatsApp message tool",
     "WhatsApp button generator",
-    "GoChatPilot tools"
+    "WhatsApp tools free",
+    "AI WhatsApp writer",
+    "WhatsApp business tools",
+    "click to chat WhatsApp",
+    "WhatsApp chatbot tools",
+    "WhatsApp auto reply",
+    "WhatsApp status caption generator",
+    "WhatsApp message templates",
+    "GoChatPilot tools",
+    "WhatsApp marketing automation",
+    "WhatsApp catalog maker",
+    "free QR code WhatsApp"
   ],
   metadataBase: new URL("https://chat-pilot.in"),
+  authors: [{ name: "GoChatPilot Team", url: "https://chat-pilot.in" }],
+  category: "Technology",
   openGraph: {
     title: "GoChatPilot - Free WhatsApp Tools & AI Message Generator",
     description:
@@ -30,10 +44,10 @@ export const metadata: Metadata = {
     siteName: "GoChatPilot",
     images: [
       {
-        url: "/logo.svg",
-        width: 1200,
-        height: 630,
-        alt: "GoChatPilot WhatsApp Tools",
+        url: "/icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "GoChatPilot - WhatsApp Tools & AI Message Generator",
       },
     ],
     locale: "en_US",
@@ -41,17 +55,26 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GoChatPilot - WhatsApp Tools & AI Generator",
+    title: "GoChatPilot - WhatsApp Tools & AI Message Generator",
     description:
       "Create WhatsApp links, QR codes, and AI messages easily with GoChatPilot.",
-    images: ["/logo.svg"],
+    images: ["/icon-512.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   alternates: {
     canonical: "https://chat-pilot.in",
+    languages: {
+      'en-US': 'https://chat-pilot.in',
+    },
   },
   manifest: "/manifest.json?v=2",
   appleWebApp: {
@@ -60,8 +83,12 @@ export const metadata: Metadata = {
     title: "GoChatPilot",
   },
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/icon-192.png",
+    apple: "/apple-icon.png",
   },
   formatDetection: {
     telephone: false,
@@ -89,6 +116,30 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Explicit Site Name for Google */}
+        <meta property="og:site_name" content="GoChatPilot" />
+        <meta name="application-name" content="GoChatPilot" />
+        <meta name="apple-mobile-web-app-title" content="GoChatPilot" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "GoChatPilot",
+              "alternateName": ["Go Chat Pilot", "ChatPilot"],
+              "url": "https://chat-pilot.in",
+              "description": "AI-Powered WhatsApp Toolkit for Marketing and Productivity",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://chat-pilot.in/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }),
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <PWAProvider>
           <ThemeProvider>
@@ -110,34 +161,26 @@ export default function RootLayout({
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify([
-                {
-                  "@context": "https://schema.org",
-                  "@type": "WebSite",
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": "GoChatPilot",
+                "operatingSystem": "Web, Android, iOS",
+                "applicationCategory": "ProductivityApplication",
+                "featureList": "WhatsApp Tools, QR Code Generator, AI Message Generator, WhatsApp Link Shortener, Button Generator, Catalog Maker",
+                "description": "AI-powered WhatsApp toolkit by GoChatPilot bringing automation, message generators, and marketing copy tools into one dashboard.",
+                "url": "https://chat-pilot.in",
+                "author": {
+                  "@type": "Organization",
                   "name": "GoChatPilot",
-                  "url": "https://chat-pilot.in",
-                  "description": "AI-Powered WhatsApp Toolkit for Marketing and Productivity by GoChatPilot",
-                  "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://chat-pilot.in/search?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                  }
+                  "url": "https://chat-pilot.in"
                 },
-                {
-                  "@context": "https://schema.org",
-                  "@type": "SoftwareApplication",
-                  "name": "GoChatPilot",
-                  "operatingSystem": "All",
-                  "applicationCategory": "BusinessApplication",
-                  "description": "AI-powered WhatsApp toolkit by GoChatPilot bringing automation, message generators, and marketing copy tools into one dashboard.",
-                  "url": "https://chat-pilot.in",
-                  "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                  }
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
                 }
-              ]),
+              }),
             }}
           />
           {children}

@@ -31,7 +31,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
           >
-            WhatsApp Marketing
+            GoChatPilot - WhatsApp Marketing
             <br />
             <span className="text-gradient">Made Simple</span>
           </motion.h1>
